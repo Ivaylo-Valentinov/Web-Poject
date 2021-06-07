@@ -1,0 +1,45 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+   margin-left: auto;
+   margin-right: auto; 
+}
+
+.title {
+    color: #546747;
+    margin-top: 150px;
+    text-align: center;
+}
+
+.formTitle {
+    color: #2B331F;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+input {
+    transform: scale(1.5);
+}
+
+.button {
+    background-color: #F6A106;
+    color: #FDDCA5;
+    border: none;
+}
+
