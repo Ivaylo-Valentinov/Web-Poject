@@ -1,0 +1,50 @@
+main{
+    margin:auto;
+    width:60%;
+}
+
+.pageSection{
+    color: #546747;
+    font-size: 24px;
+    text-align: left;
+}
+
+.lastReadTitle{
+    color: #546747;
+    font-size: 24px;
+    text-align: left;
+    margin-bottom: 0px;
+    margin-right: 250px;
+}
+
+.lastReadAuthorName{
+    text-align: left;
+    margin-top: 0px;
+    font-weight: 300;
+}
+
+.lastReadDesc {
+    margin-bottom: 0px;
+    font-weight: 100px;
+    font-size: 14px;
+}
+
+.lastRead{
+    align-self: center;
+    display: flex;
+    flex-direction: row;
+    gap: 24px;
+}
+
+.lastReadDesc{
+    margin-bottom:0px;
+    display: flex;
+}
+
+.lastReadBookInfo{
+    display: flex;
+    flex-direction: column;
+    flex: auto;
+    margin-top: 0px;
+    width: 200px;
+}
