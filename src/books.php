@@ -18,28 +18,7 @@
     }
 
   } else if ($_SERVER["REQUEST_METHOD"] === "POST") {
-
-    // $id = isset($_POST["id"]) ? transformInput($_POST["id"]) : 0;
-    // $name = isset($_POST["name"]) ? transformInput($_POST["name"]) : "";
-    // $quantity = isset($_POST["quantity"]) ? transformInput($_POST["quantity"]) : 0;
-    // $action = isset($_POST["action"]) ? transformInput($_POST["action"]) : "";
-
-    // $result = ["success" => true];
-
-    // if ($action === "add") {
-    //   $result = $product->addProduct($id, $quantity);
-    // } else if ($action === "buy") {
-    //   $result = $product->buyProduct($id, $quantity);
-    // } else if ($action === "create") {
-    //   $result = $product->createNewProduct($name, $quantity);
-    // } else {
-    //   $errors[] = "Невалидна операция.";
-    // }
-
-    // if (!$result["success"]) {
-    //   $errors[] = $result["error"];
-    // }
-
+    //TO DO
   } else  {
     $errors[] = "Невалидна заявка.";
   }
