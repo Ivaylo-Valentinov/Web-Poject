@@ -1,11 +1,13 @@
 <?php
     require_once 'user.php';
+    require_once 'tokenUtility.php';
+
 
     session_start();
 
     header('Content-Type: application/json');
 
-  //  $errors = [];
+    $errors = [];
     $response = [];
 
     if (isset($_POST)) {
@@ -30,11 +32,12 @@
                 $_SESSION['email'] = $user->getEmail();
                 $_SESSION['userId'] = $user->getUserId();
 
-                //$tokenUtility = new TokenUtility();
-                //$token = bin2hex(random_bytes(8));
-                //$epxires = time() + 30 * 24 * 60 * 60;
-              //  setcookie('token', $token, $expires, '/');
-            //    $tokenUtility->createToken($token, $_SESSION['userId'], $expires);
+                $tokenUtility = new TokenUtility();
+                $token = bin2hex(random_bytes(8));
+                $expires = time() + 30 * 24 * 60 * 60;
+                setcookie('token', $token, $expires, '/');
+                $tokenUtility->createToken($token, $_SESSION['userId'], $expires);
+
 
                 // if ($data['remember']) {
                 //     // Create cookie for remembering the user
@@ -45,15 +48,17 @@
                 //     $tokenUtility->createToken($token, $_SESSION['userId'], $expires);
                 // }
             } else {
-                $erros[] = $isValid['error'];
+                $errors[] = $isValid['error'];
             }
         }
     } else {
-        $error[] = 'Invalid request';
+        $errors[] = 'Invalid request';
+
     }
 
     if($errors) {
         $response = ['success' => false, 'data' => $errors];
+        http_response_code(404);
     } else {
         $response = ['success' => true];
     }

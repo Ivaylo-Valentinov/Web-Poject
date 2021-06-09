@@ -1,4 +1,4 @@
-function sendRequest(url, options, successCallback, errorCallback) { 
+function sendRequest(url, options, successCallback, errorCallback) {
     var request = new XMLHttpRequest();
 
     request.addEventListener('load', function() { 

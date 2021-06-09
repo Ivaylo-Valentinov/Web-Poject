@@ -7,7 +7,8 @@ CREATE TABLE `bookaloo`.`users` (
   `username` VARCHAR(255) NOT NULL , 
   `password` VARCHAR(255) NOT NULL , 
   `email` VARCHAR(255) NOT NULL , 
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`), 
+  UNIQUE `username_unique` (`username`)
 ) ENGINE = InnoDB;
 
 CREATE TABLE `bookaloo`.`books` ( 
@@ -41,3 +42,6 @@ CREATE TABLE `bookaloo`.`tokens` (
   PRIMARY KEY (`id`),
   FOREIGN KEY (`user_id`) REFERENCES users(`id`)
 ) ENGINE = InnoDB;
+
+
+INSERT INTO bookaloo.users(username, password, email) VALUES("default", "$2y$10$4TpX1PPWyjF2tVNlXLG6W.DVGwd3G9wSkJo9tm3clCOIMUfdLWObu", "default@email.com")
