@@ -1,6 +1,8 @@
 function sendRequest(url, options, successCallback, errorCallback) { 
-    var request = new XMLHttpRequest();
+    console.log("Sending request");
 
+    /*
+    var request = new XMLHttpRequest();
     request.addEventListener('load', function() { 
         var response = JSON.parse(request.responseText);
 
@@ -14,4 +16,6 @@ function sendRequest(url, options, successCallback, errorCallback) {
     request.open(options.method, url, true);
     request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     request.send(options.data);
+     */
+    
 }
