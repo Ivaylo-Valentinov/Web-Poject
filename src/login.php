@@ -15,7 +15,7 @@
 
         // TODO: testInput
 
-        if(!$data['userName']) {
+        if(!$data['username']) {
             $errors[] = 'Please eneter user name';
         }
 
