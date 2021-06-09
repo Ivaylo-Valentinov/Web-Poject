@@ -45,11 +45,10 @@
         }
 
         public function isValid() {
-            $query = $this->db->selectUserByEmailQuery(["user" => $this->email]);
+            $query = $this->db->selectUserByEmailQuery(["username" => $this->username]);
 
             if ($query["success"]) {
                 $user = $query["data"]->fetch(PDO::FETCH_ASSOC);
-                echo "USER IS VALID??!@";
                 if ($user) {
                     if (password_verify($this->password, $user["password"])) {
                         $this->password = $user["password"];
@@ -58,7 +57,7 @@
 
                         return ["success" => true];
                     } else {
-                        return ["success" => false, "error" => "Invalid password"];
+                        return ["success" => false, "error" =>password_verify($this->password, $user["password"])];
                     }
                 } else {
                     return ["success" => false, "error" => "Invalid username"];
