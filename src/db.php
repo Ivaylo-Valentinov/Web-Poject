@@ -34,6 +34,12 @@ class Database {
 
     $sql = "SELECT * FROM books";
     $this->selectAllBooks = $this->connection->prepare($sql);
+
+    $sql = "SELECT * FROM users WHERE username = :user";
+    $this->selectUser = $this->connection->prepare($sql);
+
+    $sql = "INSERT INTO users(username, password, email) VALUES (:username, :password, :email)";
+    $this->insertUser = $this->connection->prepare($sql);
   }
 
   public function insertBookQuery($data) {
@@ -53,6 +59,28 @@ class Database {
       return ["success" => true, "data" => $this->selectAllBooks];
     } catch(PDOException $e) { 
       return ["success" => false, "error" => "Connection failed: " . $e->getMessage()];
+    }
+  }
+
+  public function selectUserQuery($data) {
+    try {
+        // ["user" => "..."]
+        $this->selectUser->execute($data);
+
+        return ["success" => true, "data" => $this->selectUser];
+    } catch(PDOException $e) {
+        return ["success" => false, "error" => $e->getMessage()];
+    }
+  }
+
+  public function insertUserQuery($data) {
+    try {
+        $this->insertUser->execute($data);
+
+        return ["success" => true];
+    } catch(PDOException $e) {
+        $this->connection->rollBack();
+        return ["success" => false, "error" => "Connection failed: " . $e->getMessage()];
     }
   }
   

@@ -28,21 +28,21 @@
             return $this->userId;
         }
 
-        //public function userExists() {
-          //  $query = $this->db->selectUserQuery(["user" => $this->username]);
+        public function userExists() {
+            $query = $this->db->selectUserQuery(["user" => $this->username]);
 
-            //if ($query["success"]) {
-              //  $user = $query["data"]->fetch(PDO::FETCH_ASSOC);
+            if ($query["success"]) {
+                $user = $query["data"]->fetch(PDO::FETCH_ASSOC);
 
-                //if ($user) {
-                  //  return true;
-                //} else {
-                  //  return false;
-                //}
-            //} else {
-              //  return $query;
-            //}
-        //}
+                if ($user) {
+                  return true;
+                } else {
+                  return false;
+                }
+            } else {
+                return $query;
+            }
+        }
 
         public function isValid() {
             $query = $this->db->selectUserQuery(["user" => $this->username]);
@@ -68,17 +68,17 @@
             }
         }
 
-       // public function createUser($passwordHash, $email) {
-         //   $query = $this->db->insertUserQuery(["username" => $this->username, "password" => $passwordHash, "email" => $email]);
+        public function createUser($passwordHash, $email) {
+           $query = $this->db->insertUserQuery(["username" => $this->username, "password" => $passwordHash, "email" => $email]);
 
-           // if ($query["success"]) {
-             //   $this->password = $passwordHash;
-               // $this->email = $email;
+            if ($query["success"]) {
+                $this->password = $passwordHash;
+                $this->email = $email;
 
-                //return $query;
-            //} else {
-              //  return $query;
-           // }
-        //}
+                return $query;
+            } else {
+                return $query;
+            }
+        }
     }
 ?>
