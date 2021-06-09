@@ -1,7 +1,7 @@
-  
 <?php
     require_once 'user.php';
     require_once 'tokenUtility.php';
+
 
     session_start();
 
@@ -23,8 +23,8 @@
             $errors[] = 'Please enter password';
         }
 
-        if($data['userName'] && $data['password']) {
-            $user = new User($data['userName'], $data['password']);
+        if($data['username'] && $data['password']) {
+            $user = new User($data['username'], $data['password']);
             $isValid = $user->isValid();
 
             if($isValid['success']) {
@@ -37,6 +37,7 @@
                 $expires = time() + 30 * 24 * 60 * 60;
                 setcookie('token', $token, $expires, '/');
                 $tokenUtility->createToken($token, $_SESSION['userId'], $expires);
+
 
                 // if ($data['remember']) {
                 //     // Create cookie for remembering the user
@@ -52,6 +53,7 @@
         }
     } else {
         $errors[] = 'Invalid request';
+
     }
 
     if($errors) {

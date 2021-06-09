@@ -1,4 +1,3 @@
-
 (function () {
     /**
      * Get the login button
@@ -11,20 +10,16 @@
     login.addEventListener('click', sendForm);
 })();
 
-/**
- * Handle the click event by sending an asynchronous request to the server
- * @param {*} event
- */
 function sendForm(event) {
     /**
      * Prevent the default behavior of the clicking the form submit button
      */
     event.preventDefault();
-    console.log("login pressed!")
+
     /**
      * Get the values of the input fields
      */
-    var userName = document.getElementById('email').value;
+    var username = document.getElementById('username').value;
     var password = document.getElementById('password').value;
     var rememberMe = document.getElementById('remember-me').checked;
 
@@ -32,13 +27,12 @@ function sendForm(event) {
      * Create an object with the user's data
      */
     var user = {
-        userName,
+        username,
         password,
         remember: rememberMe
     };
 
-    console.log("Username: ", userName, "Password:", password);
-    console.log("Json string: ", JSON.stringify(user));
+   
     /**
      * Send POST request with user's data to api.php/login
      */
@@ -62,3 +56,4 @@ function load(response) {
         errors.innerHTML = response.data;
     }
 }
+

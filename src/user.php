@@ -35,9 +35,9 @@
                 $user = $query["data"]->fetch(PDO::FETCH_ASSOC);
 
                 if ($user) {
-                    return true;
+                  return true;
                 } else {
-                    return false;
+                  return false;
                 }
             } else {
                 return $query;
@@ -45,10 +45,12 @@
         }
 
         public function isValid() {
-            $query = $this->db->selectUserByEmailQuery(["username" => $this->username]);
+            $query = $this->db->selectUserQuery(["username" => $this->username]);
 
             if ($query["success"]) {
                 $user = $query["data"]->fetch(PDO::FETCH_ASSOC);
+
+
                 if ($user) {
                     if (password_verify($this->password, $user["password"])) {
                         $this->password = $user["password"];
@@ -57,7 +59,7 @@
 
                         return ["success" => true];
                     } else {
-                        return ["success" => false, "error" =>password_verify($this->password, $user["password"])];
+                        return ["success" => false, "error" => "Invalid password"];
                     }
                 } else {
                     return ["success" => false, "error" => "Invalid username"];
@@ -68,7 +70,7 @@
         }
 
         public function createUser($passwordHash, $email) {
-            $query = $this->db->insertUserQuery(["username" => $this->username, "password" => $passwordHash, "email" => $email]);
+           $query = $this->db->insertUserQuery(["username" => $this->username, "password" => $passwordHash, "email" => $email]);
 
             if ($query["success"]) {
                 $this->password = $passwordHash;
