@@ -15,7 +15,7 @@
        * Create user session token
        */
       public function createToken($token, $userId, $expires) {
-        $this->db->insertTokenQuery(array("token" => $token, "user_id" => $userId, "expires" => $expires));
+        $this->db->insertTokenQuery(array("token" => $token, "user_id" => $userId, "expiration_date" => $expires));
       }
 
       /**
@@ -44,7 +44,7 @@
                  * We check whether the token has expired
                  * If the token is still valid, we get the user's data
                  */
-                if($userToken["expires"] > time()) {
+                if($userToken["expiration_date"] > time()) {
                     $query = $db->selectUserByIdQuery(array("id" => $userToken["user_id"]));
 
                     /**
