@@ -99,7 +99,6 @@ class Database {
             $this->insertToken->execute($data);
             return array("success" => true);
           } catch(PDOException $e){
-            echo "Connection failed: " . $e->getMessage();
             return ["success" => false, "error" => $e->getMessage()];
           }
       }
@@ -115,7 +114,6 @@ class Database {
 
               return array("success" => true, "data" => $this->selectToken);
           } catch(PDOException $e){
-              echo "Connection failed: " . $e->getMessage();
 
               return ["success" => false, "error" => $e->getMessage()];
           }
@@ -132,7 +130,6 @@ class Database {
 
               return array("success" => true, "data" => $this->selectUserById);
           } catch(PDOException $e){
-              echo "Connection failed: " . $e->getMessage();
 
               return ["success" => false, "error" => $e->getMessage()];
           }
