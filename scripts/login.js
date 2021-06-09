@@ -26,7 +26,7 @@ function sendForm(event) {
      */
     var userName = document.getElementById('email').value;
     var password = document.getElementById('password').value;
-    //var rememberMe = document.getElementById('remember-me').checked;
+    var rememberMe = document.getElementById('remember-me').checked;
 
     /**
      * Create an object with the user's data
@@ -34,11 +34,11 @@ function sendForm(event) {
     var user = {
         userName,
         password,
-        //remember: rememberMe
+        remember: rememberMe
     };
 
-    //console.log(rememberMe);
-
+    console.log("Username: ", userName, "Password:", password);
+    console.log("Json string: ",JSON.stringify(user));
     /**
      * Send POST request with user's data to api.php/login
      */
@@ -55,6 +55,8 @@ function load(response) {
     console.log(response)
     if (response.success) {
         window.location = 'homepage.html';
+        console.log(response);
+
     } else {
         var errors = document.getElementById('errors');
         console.log("Login error:", errors);
