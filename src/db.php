@@ -5,6 +5,9 @@ class Database {
   private $insertBook;
   private $selectAllBooks;
   private $selectUser;
+  private $insertToken;
+  private $selectToken;
+  private $selectUserById;
 
   public function __construct() {
     $config = parse_ini_file('../config/config.ini', true);
@@ -36,8 +39,17 @@ class Database {
     $sql = "SELECT * FROM books";
     $this->selectAllBooks = $this->connection->prepare($sql);
 
-    $sql = "SELECT * FROM users WHERE email = :email";
+    $sql = "SELECT * FROM users WHERE username = :username";
     $this->selectUser = $this->connection->prepare($sql);
+
+    $sql = "INSERT INTO tokens(user_id, token,  expiration_date) VALUES (:user_id, :token,  :expiration_date)";
+    $this->insertToken = $this->connection->prepare($sql);
+
+    $sql = "SELECT * FROM tokens WHERE token=:token";
+    $this->selectToken = $this->connection->prepare($sql);
+
+    $sql = "SELECT * FROM users WHERE id=:id";
+    $this->selectUserById = $this->connection->prepare($sql);
   }
 
   public function insertBookQuery($data) {
@@ -78,6 +90,55 @@ class Database {
     $this->connection = null;
   }
 
+   /**
+         * We use this method to execute queries for inserting user session token
+         * We only execute the created prepared statement for inserting user in DB with new database
+         */
+      public function insertTokenQuery($data) {
+        try{
+            $this->insertToken->execute($data);
+            return array("success" => true);
+          } catch(PDOException $e){
+            echo "Connection failed: " . $e->getMessage();
+            $this->connection->rollBack();
+            echo "Connection failed: " . $e->getMessage();
+            return array("success" => false, "error" => $e->getMessage());
+          }
+      }
+
+      /**
+       * We use this method to execute queries for getting user session token
+       * We only execute the created prepared statement for selecting user in DB with new database
+       * If the query was executed successfully, we return the result of the executed query
+       */
+      public function selectTokenQuery($data) {
+          try{
+              $this->selectToken->execute($data);
+
+              return array("success" => true, "data" => $this->selectToken);
+          } catch(PDOException $e){
+              echo "Connection failed: " . $e->getMessage();
+
+              return array("success" => false, "error" => $e->getMessage());
+          }
+      }
+
+      /**
+         * We use this method to execute queries for getting user data by user id
+         * We only execute the created prepared statement for selecting user in DB with new database
+         * If the query was executed successfully, we return the result of the executed query
+         */
+        public function selectUserByIdQuery($data) {
+          try{
+              $this->selectUserById->execute($data);
+
+              return array("success" => true, "data" => $this->selectUserById);
+          } catch(PDOException $e){
+              echo "Connection failed: " . $e->getMessage();
+
+              return array("success" => false, "error" => $e->getMessage());
+          }
+      }
  
 }
 ?>
