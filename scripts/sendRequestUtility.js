@@ -1,13 +1,8 @@
-function sendRequest(url, options, successCallback, errorCallback) { 
-    console.log("Sending request");
-
-    
+function sendRequest(url, options, successCallback, errorCallback) {
     var request = new XMLHttpRequest();
-    console.log("Before if", request.responseText);
 
     request.addEventListener('load', function() { 
         var response = JSON.parse(request.responseText);
-        
 
         if (request.status === 200) {
             successCallback(response);
@@ -19,6 +14,4 @@ function sendRequest(url, options, successCallback, errorCallback) {
     request.open(options.method, url, true);
     request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     request.send(options.data);
-     
-    
 }
