@@ -1,4 +1,4 @@
-  
+
 (function () {
     /**
      * Get the login button
@@ -38,7 +38,7 @@ function sendForm(event) {
     };
 
     console.log("Username: ", userName, "Password:", password);
-    console.log("Json string: ",JSON.stringify(user));
+    console.log("Json string: ", JSON.stringify(user));
     /**
      * Send POST request with user's data to api.php/login
      */
@@ -55,7 +55,6 @@ function load(response) {
     console.log(response)
     if (response.success) {
         window.location = 'homepage.html';
-        console.log(response);
 
     } else {
         var errors = document.getElementById('errors');
