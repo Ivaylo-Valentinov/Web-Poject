@@ -18,11 +18,7 @@
     /**
      * Prevent the default behavior of the clicking the form submit button
      */
-    event.preventDefault();
-    var button = document.getElementById('registerBtn');
-    var p = document.createElement('p');
-    p.innerHTML = "got here";
-    button.after(p);
+
     /**
      * Get the values of the input fields
      */
@@ -35,10 +31,10 @@
      * Create an object with the user's data
      */
     var user = {
-        username: username,
-        password: password,
-        confirmPassword: confirmPassword,
-        email: email
+        username,
+        password,
+        confirmPassword,
+        email
     };
   
     /**
@@ -54,11 +50,6 @@
   * @param {*} response
   */
   function load(response) {
-
-    var button = document.getElementById('email');
-    var p = document.createElement('p');
-    p.innerHTML = "got here now";
-    button.after(p);
 
     if(response.success) {
         window.location = 'login.html';
