@@ -18,7 +18,7 @@
     /**
      * Prevent the default behavior of the clicking the form submit button
      */
-
+     event.preventDefault();
     /**
      * Get the values of the input fields
      */

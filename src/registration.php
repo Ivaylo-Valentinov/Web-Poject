@@ -5,38 +5,34 @@
     $response = [];
 
     if (isset($_POST)) {
-      $data = json_decode($_POST["data"], true);
+        $data = json_decode($_POST["data"], true);
 
-      // $userName = testInput($data["userName"]);
-      // $password = testInput($data["password"]);
-      // $confirmPassword = testInput($data["confirmPassword"]);
-      // $email = testInput($data["email"]);
+        $username = isset($data['username']) ? testInput($data['username']) : null;
+        $password = isset($data['password']) ? testInput($data['password']) : null;
+        $confirmPassword = isset($data['confirmPassword']) ? testInput($data['confirmPassword']) : null;
+        $email = isset($data['email']) ? testInput($data['email']) : null;
 
-      if (!$data['username']) {
+      if (!$username) {
         $errors[] = "Username is required.";
       }
 
-      if (!$data['password']) {
+      if (!$password) {
         $errors[] = "Password is required.";
       }
 
-      if (!$data['confirmPassword']) {
+      if (!$confirmPassword) {
         $errors[] = "Password confirmation is required.";
       }
 
-      if (!$data['email']) {
+      if (!$email) {
         $errors[] = "Email is required.";
       }
 
-      if ($data['username'] && $data['password'] && $data['confirmPassword'] && $data['email']) {
-        if ($data['password'] != $data['confirmPassword']) {
+      if ($username && $password && $confirmPassword && $email) {
+        if ($password != $confirmPassword && !$errors) {
           $errors[] = "Password confirmation does not match password.";
         } else {
-            // TODO: 
-            // * Check for user existance
-            // * Hash password
-            // * Create user in DB
-            $user = new User($data['username'], $data['password']);
+            $user = new User($username, $password);
             $exists = $user->userExists();
 
             if ($exists) {
@@ -48,13 +44,21 @@
         }
       }
     } else {
-      $erros[] = "Invalid request.";
+      $errors[] = "Invalid request.";
     }
 
     if ($errors) {
       $response = ["success" => false, "data" => $errors];
     } else {
       $response = ["success" => true];
+    }
+
+    function testInput($input) {
+        $input = trim($input);
+        $input = htmlspecialchars($input);
+        $input = stripslashes($input);
+        
+        return $input;
     }
 
     echo json_encode($response);
