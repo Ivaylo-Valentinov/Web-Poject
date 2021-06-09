@@ -1,3 +1,4 @@
+  
 <?php
     require_once 'user.php';
 
@@ -45,11 +46,11 @@
                 //     $tokenUtility->createToken($token, $_SESSION['userId'], $expires);
                 // }
             } else {
-                $erros[] = $isValid['error'];
+                $errors[] = $isValid['error'];
             }
         }
     } else {
-        $error[] = 'Invalid request';
+        $errors[] = 'Invalid request';
     }
 
     if($errors) {

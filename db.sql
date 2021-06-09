@@ -43,4 +43,4 @@ CREATE TABLE `bookaloo`.`tokens` (
 ) ENGINE = InnoDB;
 
 
-INSERT INTO bookaloo.users(username, password, email) VALUES("default", "default", "default@email.com")
+INSERT INTO bookaloo.users(username, password, email) VALUES("default", "$2y$10$FiPQCttBaEdLBxiwnvK2nuOENtdAhCzGcZgCOs8Gb4Ajptre.435K", "default@email.com")
