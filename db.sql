@@ -41,3 +41,6 @@ CREATE TABLE `bookaloo`.`tokens` (
   PRIMARY KEY (`id`),
   FOREIGN KEY (`user_id`) REFERENCES users(`id`)
 ) ENGINE = InnoDB;
+
+
+INSERT INTO bookaloo.users(username, password, email) VALUES("default", "default", "default@email.com")
