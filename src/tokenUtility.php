@@ -15,7 +15,8 @@
        * Create user session token
        */
       public function createToken($token, $userId, $expires) {
-        $this->db->insertTokenQuery(array("token" => $token, "user_id" => $userId, "expiration_date" => $expires));
+        $query = $this->db->insertTokenQuery(array("token" => $token, "user_id" => $userId, "expiration_date" => $expires));
+        return $query;
       }
 
       /**

@@ -102,7 +102,7 @@ class Database {
             echo "Connection failed: " . $e->getMessage();
             $this->connection->rollBack();
             echo "Connection failed: " . $e->getMessage();
-            return array("success" => false, "error" => $e->getMessage());
+            return ["success" => false, "error" => $e->getMessage()];
           }
       }
 
@@ -119,7 +119,7 @@ class Database {
           } catch(PDOException $e){
               echo "Connection failed: " . $e->getMessage();
 
-              return array("success" => false, "error" => $e->getMessage());
+              return ["success" => false, "error" => $e->getMessage()];
           }
       }
 
@@ -136,7 +136,7 @@ class Database {
           } catch(PDOException $e){
               echo "Connection failed: " . $e->getMessage();
 
-              return array("success" => false, "error" => $e->getMessage());
+              return ["success" => false, "error" => $e->getMessage()];
           }
       }
  

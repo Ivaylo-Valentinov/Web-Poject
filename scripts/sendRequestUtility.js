@@ -6,7 +6,6 @@ function sendRequest(url, options, successCallback, errorCallback) {
     console.log("Before if", request.responseText);
 
     request.addEventListener('load', function() { 
-        console.log(request.responseText);
         var response = JSON.parse(request.responseText);
         
 

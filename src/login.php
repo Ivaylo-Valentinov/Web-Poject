@@ -56,6 +56,7 @@
 
     if($errors) {
         $response = ['success' => false, 'data' => $errors];
+        http_response_code(404);
     } else {
         $response = ['success' => true];
     }
