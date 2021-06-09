@@ -4,6 +4,7 @@ class Database {
 
   private $insertBook;
   private $selectAllBooks;
+  private $selectUser;
 
   public function __construct() {
     $config = parse_ini_file('../config/config.ini', true);
@@ -34,6 +35,9 @@ class Database {
 
     $sql = "SELECT * FROM books";
     $this->selectAllBooks = $this->connection->prepare($sql);
+
+    $sql = "SELECT * FROM users WHERE email = :email";
+    $this->selectUser = $this->connection->prepare($sql);
   }
 
   public function insertBookQuery($data) {
@@ -56,11 +60,24 @@ class Database {
     }
   }
   
+  public function selectUserByEmailQuery($email) {
+    try {
+        // ["user" => "..."]
+        $this->selectUser->execute($email);
+
+        return ["success" => true, "data" => $this->selectUser];
+    } catch(PDOException $e) {
+        return ["success" => false, "error" => $e->getMessage()];
+    }
+  }
+  
   /**
   * Close the connection to the DB
   */
   function __destruct() {
     $this->connection = null;
   }
+
+ 
 }
 ?>
