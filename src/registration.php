@@ -6,7 +6,7 @@
     $errors = [];
     $response = [];
 
-    if (isset($_POST)) {
+    if ($_POST) {
         $data = json_decode($_POST['data'], true);
 
        // $username = $data['username'];
@@ -15,7 +15,6 @@
         //$email = $data['email'];
 
       if (!$data['username']) {
-          echo "user empty";
         $errors[] = "Username is required.";
       }
 
@@ -62,10 +61,8 @@
 
 
     if ($errors) {
-        echo "did you get here";
       $response = ["success" => false, "data" => $errors];
     } else {
-        echo "did you get here 2";
       $response = ["success" => true];
     }
 
