@@ -100,8 +100,6 @@ class Database {
             return array("success" => true);
           } catch(PDOException $e){
             echo "Connection failed: " . $e->getMessage();
-            $this->connection->rollBack();
-            echo "Connection failed: " . $e->getMessage();
             return ["success" => false, "error" => $e->getMessage()];
           }
       }
