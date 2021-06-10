@@ -3,11 +3,14 @@ header {
   grid-column: 25% auto;
 
 }
-
+nav {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: -3%;
+}
 /* Add a black background color to the top navigation */
 .topnav {
     overflow: hidden;
-    display: inline;
   }
   
   /* Style the links inside the navigation bar */
@@ -18,6 +21,7 @@ header {
     padding: 14px 16px;
     text-decoration: none;
     font-size: 20px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   }
 
   .topnav a.unactive {
