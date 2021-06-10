@@ -29,7 +29,7 @@
         }
 
         public function userExists() {
-            $query = $this->db->selectUserQuery(["user" => $this->username]);
+            $query = $this->db->selectUserQuery(["username" => $this->username]);
 
             if ($query["success"]) {
                 $user = $query["data"]->fetch(PDO::FETCH_ASSOC);
