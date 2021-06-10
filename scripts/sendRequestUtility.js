@@ -1,9 +1,13 @@
 function sendRequest(url, options, successCallback, errorCallback) {
     var request = new XMLHttpRequest();
+    console.log("Request");
+    console.log(request);
 
     request.addEventListener('load', function() { 
-        var response = JSON.parse(request.responseText);
-
+        console.log("Taken books:");
+        console.log(request.responseText);
+        //var response = JSON.parse(request.responseText);
+       
         if (request.status === 200) {
             successCallback(response);
         } else {

@@ -8,6 +8,7 @@ class Database {
   private $insertToken;
   private $selectToken;
   private $selectUserById;
+  private $getTakenBooks;
 
   public function __construct() {
     $config = parse_ini_file('../config/config.ini', true);
@@ -53,7 +54,9 @@ class Database {
 
     $sql = "INSERT INTO users(username, password, email) VALUES (:username, :password, :email)";
     $this->insertUser = $this->connection->prepare($sql);
-
+    
+    $sql = "SELECT user_id, book_id FROM taken_books WHERE user_id=:user_id JOIN books ON book_id = id";
+    $this->getTakenBooks = $this->connection->prepare($sql);
   }
 
   public function insertBookQuery($data) {
@@ -160,6 +163,15 @@ class Database {
               return ["success" => false, "error" => $e->getMessage()];
           }
       }
- 
+
+      public function getTakenBooks($data) {
+        try {
+            $this->getTakenBooks->execute($data);
+
+            return ["success" => true];
+        } catch(PDOException $e) {
+            return ["success" => false, "error" => "Connection failed: " . $e->getMessage()];
+        }
+    }
 }
 ?>
