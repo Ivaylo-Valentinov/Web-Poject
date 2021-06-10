@@ -27,6 +27,8 @@ function setHomepage(event){
         home.classList.toggle('active');
     }
 
+    window.location = 'homepage.html';
+
 }
 
 function setReferatsPage(event){
@@ -38,6 +40,8 @@ function setReferatsPage(event){
         current.classList.toggle('unactive');
         ref.classList.toggle('active');
     }
+
+    window.location = 'referats.html';
 }
 
 function setBooksPage(event){
