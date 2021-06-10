@@ -43,3 +43,9 @@ input {
     border: none;
 }
 
+.button:hover{
+    background-color: #FDDCA5;
+    color: #F6A106;
+    cursor: pointer;
+}
+

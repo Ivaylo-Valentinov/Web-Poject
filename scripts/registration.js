@@ -1,12 +1,6 @@
 (function() {
-    /**
-     * Get the register button
-     */
     var register = document.getElementById('registerBtn');
   
-    /**
-     * Listen for click event on the register button
-     */
     register.addEventListener('click', sendForm);
   })();
   
@@ -15,21 +9,13 @@
   * @param {*} event
   */
   function sendForm(event) {
-    /**
-     * Prevent the default behavior of the clicking the form submit button
-     */
      event.preventDefault();
-    /**
-     * Get the values of the input fields
-     */
+  
     var email = document.getElementById('email').value;
     var username = document.getElementById('username').value;
     var password = document.getElementById('password').value;
     var confirmPassword = document.getElementById('confirm-password').value;
   
-    /**
-     * Create an object with the user's data
-     */
     var user = {
         username,
         password,
