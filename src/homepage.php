@@ -8,14 +8,14 @@ $errors = [];
 $response = [];
 
 if(isset($_POST)){
-    $data = json_decode($_POST["data"], true);
+    $data = json_decode($_POST['data'], true);
 
     $db = new Database();
 
-    $query = $this->db->getTakenBooks(["user_id" => $data['user_id']);
+    $query = $db->getTakenBooks(['user_id' => $data['user_id']]);
 
     if ($query["success"]) {
-        $takenBooks = $query["data"]->fetch(PDO::FETCH_ASSOC);
+        $takenBooks = $query['data']->fetch(PDO::FETCH_ASSOC);
 
         if ($user) {
             $response = ['success' => true, 'data'=> $takenBooks];

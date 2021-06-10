@@ -55,7 +55,7 @@ class Database {
     $sql = "INSERT INTO users(username, password, email) VALUES (:username, :password, :email)";
     $this->insertUser = $this->connection->prepare($sql);
     
-    $sql = "SELECT user_id, book_id FROM taken_books WHERE user_id=:user_id JOIN books ON book_id = id";
+    $sql = "SELECT * FROM taken_books tb  JOIN books b ON tb.book_id = b.id  WHERE user_id=:user_id ";
     $this->getTakenBooks = $this->connection->prepare($sql);
   }
 

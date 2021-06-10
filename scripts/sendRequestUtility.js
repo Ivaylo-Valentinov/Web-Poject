@@ -6,7 +6,7 @@ function sendRequest(url, options, successCallback, errorCallback) {
     request.addEventListener('load', function() { 
         console.log("Taken books:");
         console.log(request.responseText);
-        //var response = JSON.parse(request.responseText);
+        var response = JSON.parse(request.responseText);
        
         if (request.status === 200) {
             successCallback(response);
