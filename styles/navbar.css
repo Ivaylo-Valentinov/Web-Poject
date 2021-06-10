@@ -1,11 +1,18 @@
+header {
+  display: grid;
+  grid-column: 25% auto;
+
+}
+
 /* Add a black background color to the top navigation */
 .topnav {
     overflow: hidden;
+    display: inline;
   }
   
   /* Style the links inside the navigation bar */
   .topnav a {
-    float: left;
+    float: none;
     color: #414d2f;
     text-align: center;
     padding: 14px 16px;

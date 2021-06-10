@@ -38,8 +38,21 @@ input {
 }
 
 .button {
+    width: 80px;
+    font-weight: bold;
     background-color: #F6A106;
-    color: #FDDCA5;
+    color: #faebd1;
     border: none;
+}
+
+.button:hover{
+    background-color: #faebd1;
+    color: #F6A106;
+    cursor: pointer;
+}
+
+.flipTitle{
+    transition: all 3s;
+    transform: rotate3d(0, 1 ,0 , 360deg);
 }
 

@@ -44,4 +44,15 @@ CREATE TABLE `bookaloo`.`tokens` (
 ) ENGINE = InnoDB;
 
 
-INSERT INTO bookaloo.users(username, password, email) VALUES("default", "$2y$10$4TpX1PPWyjF2tVNlXLG6W.DVGwd3G9wSkJo9tm3clCOIMUfdLWObu", "default@email.com")
+INSERT INTO bookaloo.users(username, password, email) VALUES("default", "$2y$10$4TpX1PPWyjF2tVNlXLG6W.DVGwd3G9wSkJo9tm3clCOIMUfdLWObu", "default@email.com");
+INSERT INTO bookaloo.books(title, author, description, count, type, link, cover) VALUES("Book 1", "Book Author 1", "Book Description 1", 10, "book", "placeholder_link", "cover_image_link");
+INSERT INTO bookaloo.books(title, author, description, count, type, link, cover) VALUES("Book 2", "Book Author 2", "Book Description 2", 10, "book", "placeholder_link", "cover_image_link");
+INSERT INTO bookaloo.books(title, author, description, count, type, link, cover) VALUES("Book 3", "Book Author 3", "Book Description 3", 10, "book", "placeholder_link", "cover_image_link");
+
+INSERT INTO bookaloo.books(title, author, description, count, type, link, cover) VALUES("Ref 1", "Ref Author 1", "Ref Description 1", 10, "ref", "placeholder_link", "cover_image_link");
+INSERT INTO bookaloo.books(title, author, description, count, type, link, cover) VALUES("Ref 2", "Ref Author 2", "Ref Description 2", 10, "ref", "placeholder_link", "cover_image_link");
+INSERT INTO bookaloo.books(title, author, description, count, type, link, cover) VALUES("Ref 3", "Ref Author 3", "Ref Description 3", 10, "ref", "placeholder_link", "cover_image_link");
+INSERT INTO bookaloo.taken_books(user_id, book_id, expiration_date, checkout_date) VALUES(1, 1, '2021-06-06', '2021-06-1');
+INSERT INTO bookaloo.taken_books(user_id, book_id, expiration_date, checkout_date) VALUES(1, 2, '2021-06-06', '2021-06-1');
+INSERT INTO bookaloo.taken_books(user_id, book_id, expiration_date, checkout_date) VALUES(1, 3, '2021-06-06', '2021-06-1');
+INSERT INTO bookaloo.taken_books(user_id, book_id, expiration_date, checkout_date) VALUES(1, 4, '2021-06-06', '2021-06-1');
