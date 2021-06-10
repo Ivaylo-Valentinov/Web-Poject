@@ -18,7 +18,21 @@
     }
 
   } else if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    //TO DO
+
+    $title = $_POST["title"];
+    $author = $_POST["author"];
+    $desc = $_POST["desc"];
+    $count = $_POST["count"];
+    $type = $_POST["type"];
+
+    $file_name = $_FILES['file']['name'];
+    $file_type = $_FILES['file']['type'];      
+    $file_size = $_FILES['file']['size'];
+    $file_tmp_name  = $_FILES['file']['tmp_name'];
+
+    if($file_name){
+        move_uploaded_file($file_tmp_name,"../pdfs/".$file_name);
+    }
   } else  {
     $errors[] = "Невалидна заявка.";
   }

@@ -18,7 +18,7 @@ class Book {
     }
   }
 
-  public function addMark($title, $author, $description, $count, $link, $type = "book") {
+  public function insertBook($title, $author, $description, $count, $link, $type = "book") {
     //validate....
     $query = $this->db->insertBookQuery([
       "title" => $title, 
