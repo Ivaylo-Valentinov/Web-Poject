@@ -10,8 +10,6 @@ function sendRequest(url, options, successCallback, errorCallback) {
             var response = JSON.parse(request.responseText);    
             console.log("Request text:", request.responseText);
         } catch (error) {
-
-            console.log("Request text:", request.responseText);
             console.log("Request text:", request.responseText);
             console.log("Error", error);
         }
