@@ -53,13 +53,13 @@ function appendCheckedBooksTable(bookInfo) {
     var viewButton = document.createElement('button');
     viewButton.innerHTML = 'Read';
 
-    var checkOutButton = document.createElement('button');
-    checkOutButton.innerHTML = 'Return';
+    var returnButton = document.createElement('button');
+    returnButton.innerHTML = 'Return';
 
     var actionsTd = document.createElement('td');
-    actionsTd.append(viewButton, checkOutButton);
+    actionsTd.append(viewButton, returnButton);
 
-    tr.append(titleTd, authorTd, checkoutTd, expirationTd);
+    tr.append(titleTd, authorTd, checkoutTd, expirationTd, actionsTd );
     booksTbody.appendChild(tr);
 }
 
@@ -85,13 +85,13 @@ function appendCheckedRefsTable(bookInfo) {
     var viewButton = document.createElement('button');
     viewButton.innerHTML = 'Read';
 
-    var checkOutButton = document.createElement('button');
-    checkOutButton.innerHTML = 'Return';
+    var returnButton = document.createElement('button');
+    returnButton.innerHTML = 'Return';
 
     var actionsTd = document.createElement('td');
-    actionsTd.append(viewButton, checkOutButton);
+    actionsTd.append(viewButton, returnButton);
 
-    tr.append(titleTd, authorTd, checkoutTd, expirationTd);
+    tr.append(titleTd, authorTd, checkoutTd, expirationTd, actionsTd);
     booksTbody.appendChild(tr);
 }
 

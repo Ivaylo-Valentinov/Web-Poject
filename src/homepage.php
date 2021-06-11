@@ -21,7 +21,6 @@ if(isset($_POST)){
 
             $query = $db->getTakenBooks(["cuid" => $_SESSION['user_id']]);
             if ($query["success"]) {
-                $takenBooks = $query["data"]->fetch(PDO::FETCH_ASSOC);
                 $response =  ["success" => true,"userID"=>$isValid ,"data" =>$query["data"]->fetchAll(PDO::FETCH_ASSOC)];
             } else {
                 $errors[] = $query["error"];
@@ -43,12 +42,8 @@ if(isset($_POST)){
         echo json_encode($errors);
       }
       else{
-        //http_response_code(200);
-    
+        http_response_code(200);
+        echo json_encode($response);
       }
-
 }
-
-echo json_encode($response);
-
 ?>
