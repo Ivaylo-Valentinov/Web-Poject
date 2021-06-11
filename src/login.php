@@ -9,7 +9,6 @@
 
     $errors = [];
     $response = [];
-    $status;
     if (isset($_POST)) {
         $data = json_decode($_POST['data'], true);
 

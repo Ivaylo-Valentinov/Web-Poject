@@ -184,7 +184,7 @@ class Database {
       try {
           $this->checkoutBook->execute($data);
 
-          return ["success" => true, "data" => $this->getTakenBooks];
+          return ["success" => true, "data" => $this->checkoutBook];
         } catch(PDOException $e) {
           return ["success" => false, "error" => "Connection failed: " . $e->getMessage()];
       }
