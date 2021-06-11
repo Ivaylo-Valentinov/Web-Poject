@@ -12,6 +12,7 @@ function sendRequest(url, options, successCallback, errorCallback) {
         } catch (error) {
 
             console.log("Request text:", request.responseText);
+            console.log("Request text:", request.responseText);
             console.log("Error", error);
         }
         
