@@ -12,13 +12,13 @@ if(isset($_POST)){
 
     $db = new Database();
 
-    $query = $db->getTakenBooks(["user_id" => 1]);
-
+    $query = $db->getTakenBooks(["cuid" => 1]);
+    
     if ($query["success"]) {
         $takenBooks = $query["data"]->fetch(PDO::FETCH_ASSOC);
-        $response =  ["success" => true, "data" =>$takenBooks];
+        $response =  ["success" => true, "data" =>$query["data"]->fetchAll(PDO::FETCH_ASSOC)];
     } else {
-        $errors[] = $takenBooks["error"];
+        $errors[] = $query["error"];
     }
 
     if ($errors) {

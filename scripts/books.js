@@ -6,7 +6,7 @@ function appendTable(bookInfo) {
     var booksTbody = document.querySelector('#books tbody');
 
     var tr = document.createElement('tr');
-    tr.setAttribute('class', 'student');
+    tr.setAttribute('class', 'book');
 
     var titleTd = document.createElement('td');
     titleTd.innerHTML = bookInfo.title;

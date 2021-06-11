@@ -1,14 +1,16 @@
 function sendRequest(url, options, successCallback, errorCallback) {
     var request = new XMLHttpRequest();
-    console.log("Request");
-    console.log(request);
+    //console.log("Request");
+    //console.log(request);
 
     request.addEventListener('load', function() { 
-        console.log("Taken books:");
-        console.log(request.responseText);
+        //console.log("response text:");
+        //console.log(request.responseText);
         var response = JSON.parse(request.responseText);
        
         if (request.status === 200) {
+            //console.log("Calling success callback");
+            //console.log(response);
             successCallback(response);
         } else {
             errorCallback(response);
