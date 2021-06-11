@@ -3,13 +3,15 @@
 
 class Book {
   private $db;
+  private $type;
 
   public function __construct() {
     $this->db = new Database();
+    $this->type = "book";
   }
 
   public function getAllBooks() {
-    $query = $this->db->selectAllBooksQuery();
+    $query = $this->db->selectAllBooksQuery(["type" => $this->type]);
 
     if ($query["success"]) {
       return ["success" => true, "data" => $query["data"]->fetchAll(PDO::FETCH_ASSOC)];

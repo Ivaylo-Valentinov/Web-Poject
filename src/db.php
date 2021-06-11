@@ -36,7 +36,7 @@ class Database {
     $sql = "INSERT INTO books(title, author, description, count, type, link) VALUES(:title, :author, :description, :count, :type, :link)";
     $this->insertBook = $this->connection->prepare($sql);
 
-    $sql = "SELECT * FROM books";
+    $sql = "SELECT * FROM books WHERE type = :type";
     $this->selectAllBooks = $this->connection->prepare($sql);
 
     $sql = "SELECT * FROM users WHERE username = :username";
@@ -54,6 +54,9 @@ class Database {
     $sql = "INSERT INTO users(username, password, email) VALUES (:username, :password, :email)";
     $this->insertUser = $this->connection->prepare($sql);
 
+    $sql = "SELECT * FROM books WHERE type = :type";
+    $this->selectAllReferats = $this->connection->prepare($sql);
+
   }
 
   public function insertBookQuery($data) {
@@ -66,9 +69,9 @@ class Database {
     }
   }
 
-  public function selectAllBooksQuery() {
+  public function selectAllBooksQuery($data) {
     try {
-      $this->selectAllBooks->execute();
+      $this->selectAllBooks->execute($data);
 
       return ["success" => true, "data" => $this->selectAllBooks];
     } catch(PDOException $e) { 
@@ -107,6 +110,16 @@ class Database {
     } catch(PDOException $e) {
         return ["success" => false, "error" => $e->getMessage()];
     }
+  }
+
+  public function selectAllReferatsQuery($data) {
+    try{
+      $this->selectAllReferats->execute($data);
+
+      return ["success" => true, "data" => $this->selectAllReferats];
+    }catch(PDOException $e) {
+      return ["success" => false, "error" => $e->getMessage()];
+  }
   }
   
   /**
