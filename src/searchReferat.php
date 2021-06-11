@@ -1,24 +1,37 @@
 <?php
   require_once "referat.php";
 
-  header("Content-Type: application/json");
+ // header("Content-Type: application/json");
 
   $errors = [];
   $response = [];
   $referat = new Referat();
 
   if ($_SERVER["REQUEST_METHOD"] === "GET") {
-    $data = json_decode($_GET["data"], true);
+    /*$data = json_decode($_GET["data"], true);
 
-    $result = $referat->getSpecificReferat($data["searchInfo"]);
-
-    if ($allReferats["success"]) {
-      $response = $allReferats["data"];
+    //$search = isset($data['searchInfo']) ? testInput($data['searchInfo']) : null;
+    $search = 
+    $result = $referat->getSpecificReferat($search);
+    
+    if ($result["success"]) {
+      $response = $result["data"];
     } else {
-      $errors[] = $allReferats["error"];
-    }
+      $errors[] = $result["error"];
+    }*/
 
   } else if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    echo "enter";
+    $data = json_decode($_POST["data"], true);
+
+    $search = isset($data['searchInfo']) ? testInput($data['searchInfo']) : null;
+    $result = $referat->getSpecificReferat($search);
+    
+    if ($result["success"]) {
+      $response = $result["data"];
+    } else {
+      $errors[] = $result["error"];
+    }
     //TO DO
   } else  {
     $errors[] = "Невалидна заявка.";

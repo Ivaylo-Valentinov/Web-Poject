@@ -21,7 +21,10 @@ class Referat {
   }
 
   public function getSpecificReferat($title) {
-    $query = $this->db->selectSpecificReadingQuery(["title" => $title, "type" = $this->type]);
+
+    echo $title;
+
+    $query = $this->db->selectSpecificReadingQuery(["title" => $title, "type" => $this->type]);
 
     if ($query["success"]) {
       return ["success" => true, "data" => $query["data"]->fetchAll(PDO::FETCH_ASSOC)];

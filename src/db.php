@@ -57,7 +57,7 @@ class Database {
     $sql = "SELECT * FROM books WHERE type = :type";
     $this->selectAllReferats = $this->connection->prepare($sql);
 
-    $sql = "SELECT * FROM books WHERE title LIKE '%:title%' AND type = :type";
+    $sql = "SELECT * FROM books WHERE title = :title AND type = :type";
     $this->selectSpecificReading = $this->connection->prepare($sql);
 
   }
