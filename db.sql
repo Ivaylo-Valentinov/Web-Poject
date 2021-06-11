@@ -20,6 +20,7 @@ CREATE TABLE `bookaloo`.`books` (
   `type` VARCHAR(255) NOT NULL ,
   `link` VARCHAR(255) NOT NULL ,
   `cover` VARCHAR(255) NULL ,
+  `checkout_amount` VARCHAR(255) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`)
 ) ENGINE = InnoDB;
 
@@ -33,6 +34,8 @@ CREATE TABLE `bookaloo`.`taken_books` (
   FOREIGN KEY (`user_id`) REFERENCES users(`id`),
   FOREIGN KEY (`book_id`) REFERENCES books(`id`)
 ) ENGINE = InnoDB;
+
+
 
 CREATE TABLE `bookaloo`.`tokens` (
   `id` INT NOT NULL AUTO_INCREMENT , 
