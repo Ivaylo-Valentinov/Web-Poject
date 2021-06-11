@@ -1,11 +1,8 @@
 function sendRequest(url, options, successCallback, errorCallback) {
     var request = new XMLHttpRequest();
-    //console.log("Request");
-    //console.log(request);
-
+    
     request.addEventListener('load', function() { 
-        //console.log("response text:");
-        //console.log(request.responseText);
+        
         try {
             var response = JSON.parse(request.responseText);    
             console.log("Request text:", request.responseText);
@@ -13,8 +10,7 @@ function sendRequest(url, options, successCallback, errorCallback) {
             console.log("Request text:", request.responseText);
             console.log("Error", error);
         }
-        
-       
+               
         if (request.status === 200) {
             console.log("Calling success callback");
             console.log(response);
