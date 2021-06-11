@@ -23,7 +23,7 @@ function requestTakenBooks() {
 function load(response) {
     console.log(response)
     if (response.success) {
-        window.location = 'homepage.html';
+        //window.location = 'homepage.html';
 
     } else {
         var errors = document.getElementById('errors');

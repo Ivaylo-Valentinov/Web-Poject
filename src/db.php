@@ -55,7 +55,7 @@ class Database {
     $sql = "INSERT INTO users(username, password, email) VALUES (:username, :password, :email)";
     $this->insertUser = $this->connection->prepare($sql);
     
-    $sql = "SELECT * FROM taken_books tb  JOIN books b ON tb.book_id = b.id  WHERE user_id=:user_id ";
+    $sql = "SELECT * FROM taken_books tb JOIN books b ON tb.book_id = b.id  WHERE user_id=:user_id ";
     $this->getTakenBooks = $this->connection->prepare($sql);
   }
 
@@ -168,8 +168,8 @@ class Database {
         try {
             $this->getTakenBooks->execute($data);
 
-            return ["success" => true];
-        } catch(PDOException $e) {
+            return ["success" => true, "data" => $this->getTakenBooks];
+          } catch(PDOException $e) {
             return ["success" => false, "error" => "Connection failed: " . $e->getMessage()];
         }
     }
