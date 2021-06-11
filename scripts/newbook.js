@@ -6,13 +6,18 @@
   
 function sendForm(event) {
      event.preventDefault();
-  //TO DO add validations
+
     var title = document.getElementById('title').value;
     var author = document.getElementById('author').value;
     var desc = document.getElementById('desc').value;
     var count = document.getElementById('count').value;
     var type = document.getElementById('type').value;
     var file = document.getElementById('file').files[0];
+
+    if (!file) {
+        errors.innerHTML = "You should upload a book!";
+        return;
+    }
 
     var formdata = new FormData();
 
@@ -28,24 +33,23 @@ function sendForm(event) {
     request.open('POST', 'src/books.php', true);
     request.send(formdata);
     request.addEventListener('load', function() {
-
+        var response = JSON.parse(request.responseText);
+        
         if (request.status === 200) {
-            load(request.responseText);
+            onAddedBook();
         } else {
-            console.log(request.responseText);
+            onError(response);
         }
     });
 }
   
 
-function load(response) {
+function onAddedBook() {
+    alert("Success");
+    window.location = 'homepage.html';
+}
 
-    if(response.success) {
-        // window.location = 'login.html';
-        alert("Success");
-        console.log(response);
-    } else {
-        var errors = document.getElementById('errors');
-        errors.innerHTML = response;
-    }
+function onError(response) {
+    var errors = document.getElementById('errors');
+    errors.innerHTML = response;
 }
