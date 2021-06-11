@@ -1,5 +1,9 @@
 (function() {
     sendRequest('src/referats.php', {method: 'GET'}, loadReferats, console.log);
+
+    var searchBtn = document.getElementById("searchBtn");
+    searchBtn.addEventListener("click", sendReferatRequest);
+
 })();
 
 function appendTable(referatInfo) {
@@ -27,7 +31,25 @@ function appendTable(referatInfo) {
     referatsTbody.appendChild(tr);
 }
 
+function sendReferatRequest(event) {
+    var searchInfo = document.getElementById("searchBar").value;
+
+    if(searchInfo.length > 0) {
+        var request = {
+            searchInfo
+        }
+
+        sendRequest('src/searchReferat.php', {method: 'GET', data: `data=${JSON.stringify(request)}`}, loadSpecificReferats, console.log);
+    }
+}
+
 function loadReferats(referatsData) {
+    referatsData.forEach(function (referatInfo) {
+        appendTable(referatInfo);
+    });
+}
+
+function loadSpecificReferats(referatsData) {
     referatsData.forEach(function (referatInfo) {
         appendTable(referatInfo);
     });

@@ -57,6 +57,9 @@ class Database {
     $sql = "SELECT * FROM books WHERE type = :type";
     $this->selectAllReferats = $this->connection->prepare($sql);
 
+    $sql = "SELECT * FROM books WHERE title LIKE '%:title%' AND type = :type";
+    $this->selectSpecificReading = $this->connection->prepare($sql);
+
   }
 
   public function insertBookQuery($data) {
@@ -119,7 +122,17 @@ class Database {
       return ["success" => true, "data" => $this->selectAllReferats];
     }catch(PDOException $e) {
       return ["success" => false, "error" => $e->getMessage()];
+    }
   }
+
+  public function selectSpecificReadingQuery($data) {
+    try{
+      $this->selectSpecificReading->execute($data);
+
+      return ["success" => true, "data" => $this->selectSpecificReading];
+    }catch(PDOException $e) {
+      return ["success" => false, "error" => $e->getMessage()];
+    }
   }
   
   /**
