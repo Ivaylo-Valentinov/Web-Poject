@@ -3,6 +3,7 @@
 require_once "db.php";
 require_once "book.php";
 require_once "user.php";
+require_once 'tokenUtility.php';
 
 $errors = [];
 $response = [];
@@ -10,25 +11,44 @@ $response = [];
 if(isset($_POST)){
     $data = json_decode($_POST["data"], true);
 
-    $db = new Database();
+    if ($_COOKIE['token']) {
+        $tokenUtility = new TokenUtility();
+        $isValid = $tokenUtility->checkToken($_COOKIE['token']);
 
-    $query = $db->getTakenBooks(["cuid" => 1]);
-    
-    if ($query["success"]) {
-        $takenBooks = $query["data"]->fetch(PDO::FETCH_ASSOC);
-        $response =  ["success" => true, "data" =>$query["data"]->fetchAll(PDO::FETCH_ASSOC)];
+        if ($isValid["success"]) {
+            
+            $db = new Database();
+
+            $query = $db->getTakenBooks(["cuid" => $_SESSION['user_id']]);
+            if ($query["success"]) {
+                $takenBooks = $query["data"]->fetch(PDO::FETCH_ASSOC);
+                $response =  ["success" => true,"userID"=>$isValid ,"data" =>$query["data"]->fetchAll(PDO::FETCH_ASSOC)];
+            } else {
+                $errors[] = $query["error"];
+            }
+        } 
+        else 
+        {
+            $response =  ["success" => "Invalid cookie", "data" =>$isValid];
+        }
     } else {
-        $errors[] = $query["error"];
+        $response =  ["success" => false, "data" =>"noCookie"];
     }
+    
+    
 
     if ($errors) {
         http_response_code(400);    
     
         echo json_encode($errors);
       }
+      else{
+        //http_response_code(200);
+    
+      }
+
 }
 
-http_response_code(200);
-    
 echo json_encode($response);
+
 ?>

@@ -22,9 +22,8 @@ function requestTakenBooks() {
  */
 function load(response) {
     console.log("Load function");
-    //console.log(response["data"]);
+    console.log(response);
     if (response.success) {
-        
         loadTables(response["data"]);
     } else {
         var errors = document.getElementById('errors');
