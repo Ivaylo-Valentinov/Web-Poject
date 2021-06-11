@@ -8,6 +8,10 @@ class Database {
   private $insertToken;
   private $selectToken;
   private $selectUserById;
+  private $getTakenBooks;
+  private $checkoutBook;
+  private $returnBook;
+  private $incrementCheckoutCount;
 
   public function __construct() {
     $config = parse_ini_file('../config/config.ini', true);
@@ -53,6 +57,18 @@ class Database {
 
     $sql = "INSERT INTO users(username, password, email) VALUES (:username, :password, :email)";
     $this->insertUser = $this->connection->prepare($sql);
+    
+    $sql = "SELECT * FROM taken_books tb JOIN books b ON tb.book_id = b.id WHERE user_id=:cuid ";
+    $this->getTakenBooks = $this->connection->prepare($sql);
+
+    $sql = "UPDATE books SET checkout_amount = checkout_amount+1 WHERE id =:bookId;"
+    $this->incrementCheckoutCount = $this->connection->prepare($sql);
+    
+    $sql = "INSERT INTO taken_books(user_id, book_id, expiration_data) VALUES (:user_id, :bookid, :expDate)";
+    $this->checkoutBook = $this->connection->prepare($sql);
+
+    $sql = "DELETE FROM `taken_books` WHERE book_id=:bookId";
+    $this->returnBook = $this->connection->prepare($sql);
 
   }
 
@@ -109,13 +125,6 @@ class Database {
     }
   }
   
-  /**
-  * Close the connection to the DB
-  */
-  function __destruct() {
-    $this->connection = null;
-  }
-
    /**
          * We use this method to execute queries for inserting user session token
          * We only execute the created prepared statement for inserting user in DB with new database
@@ -160,6 +169,43 @@ class Database {
               return ["success" => false, "error" => $e->getMessage()];
           }
       }
- 
+
+      public function getTakenBooks($data) {
+        try {
+            $this->getTakenBooks->execute($data);
+
+            return ["success" => true, "data" => $this->getTakenBooks];
+          } catch(PDOException $e) {
+            return ["success" => false, "error" => "Connection failed: " . $e->getMessage()];
+        }
+    }
+
+    public function checkoutBook($data) {
+      try {
+          $this->checkoutBook->execute($data);
+
+          return ["success" => true, "data" => $this->checkoutBook];
+        } catch(PDOException $e) {
+          return ["success" => false, "error" => "Connection failed: " . $e->getMessage()];
+      }
+  }
+
+  public function returnBook($data) {
+    try {
+        $this->returnBook->execute($data);
+
+        return ["success" => true, "data" => $this->returnBook];
+      } catch(PDOException $e) {
+        return ["success" => false, "error" => "Connection failed: " . $e->getMessage()];
+    }
+}
+
+      /**
+  * Close the connection to the DB
+  */
+  function __destruct() {
+    $this->connection = null;
+  }
+
 }
 ?>

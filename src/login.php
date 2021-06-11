@@ -9,7 +9,6 @@
 
     $errors = [];
     $response = [];
-
     if (isset($_POST)) {
         $data = json_decode($_POST['data'], true);
 
@@ -38,7 +37,7 @@
                 setcookie('token', $token, $expires, '/');
                 $tokenUtility->createToken($token, $_SESSION['userId'], $expires);
 
-
+                //$status ="Should've created token ";
                 // if ($data['remember']) {
                 //     // Create cookie for remembering the user
                 //     $tokenUtility = new TokenUtility();

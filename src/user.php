@@ -28,6 +28,10 @@
             return $this->userId;
         }
 
+        public function setEmail($mail){
+                $this->email = $mail;
+        }
+
         public function userExists() {
             $query = $this->db->selectUserQuery(["username" => $this->username]);
 
