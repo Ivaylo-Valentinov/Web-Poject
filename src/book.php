@@ -18,18 +18,53 @@ class Book {
     }
   }
 
-  public function addMark($title, $author, $description, $count, $link, $type = "book") {
-    //validate....
+  public function insertBook($title, $author, $description, $count, $link) {
+    $validate = $this->validateString($title);
+    if (!$validate["success"]) {
+      return $validate;
+    }
+
+    $validate = $this->validateString($author);
+    if (!$validate["success"]) {
+      return $validate;
+    }
+
+    $validate = $this->validateString($description);
+    if (!$validate["success"]) {
+      return $validate;
+    }
+
+    $validate = $this->validatePositiveNumber($count);
+    if (!$validate["success"]) {
+      return $validate;
+    }
+
     $query = $this->db->insertBookQuery([
       "title" => $title, 
       "author" => $author,
       "description" => $description,
       "count" => $count,
       "link" => $link,
-      "type" =>  $type
+      "type" =>  "book"
     ]);
 
     return $query;
   }
+
+    private function validateString($string) {
+        if (mb_strlen($string) === 0) {
+            return ["success" => false, "error" => "String must not be empty"];
+        }
+
+        return ["success" => true];
+    }
+
+    private function validatePositiveNumber($number) {
+        if (!is_numeric($number) || $number < 0) {
+            return ["success" => false, "error" => "Must be a positive number"];
+        }
+    
+        return ["success" => true];
+    }
 }
 ?>
