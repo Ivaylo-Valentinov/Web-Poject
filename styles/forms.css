@@ -33,7 +33,7 @@ form {
     gap: 20px;
 }
 
-input {
+input, select {
     transform: scale(1.5);
 }
 

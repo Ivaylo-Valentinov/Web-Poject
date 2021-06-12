@@ -45,8 +45,8 @@
                  * We check whether the token has expired
                  * If the token is still valid, we get the user's data
                  */
-                if($userToken["expiration_date"] > time()) {
-                    $query = $db->selectUserByIdQuery(array("id" => $userToken["user_id"]));
+                if($userToken["expiration_date"] <   time()) {
+                    $query = $this->db->selectUserByIdQuery(["id" => $userToken["user_id"]]);
 
                     /**
                      * If the query was executed successfully we can return user's data
@@ -58,22 +58,22 @@
                          * the fetch(PDO::FETCH_ASSOC) method on $query["data"].
                          */
                         $foundUser = $query["data"]->fetch(PDO::FETCH_ASSOC);
-
+                        $_SESSION["user_id"] = $userToken["user_id"];
                         $user = new User($foundUser["username"],  $foundUser["password"]);
                         $user->setEmail($foundUser["email"]);
 
-                        return array("success" => true, "user" => $user);
+                        return array("success" => true, "user" => $userToken["user_id"]);
                     } else {
-                        return array("success" => false, "error" => $query["error"]);
+                        return array("success" => false, "error" => $query["error"], "data"=>"Query Err");
                     }
                 } else {
-                    return array("success" => false, "error" => "Вашата сесия е изтекла.");
+                    return array("success" => false, "error" => "Token expired");
                 }
             } else {
-                return array("success" => false, "error" => "Вашата сесия е изтекла.");
+                return array("success" => false, "error" => "User token not found");
             }
         } else {
-            return array("success" => false, "error" => $query["error"]);
+            return array("success" => false, "error" => $query["error"], "data"=>"Query Err 2");
         }
     }
   }

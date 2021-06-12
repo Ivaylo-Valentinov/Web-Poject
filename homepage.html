@@ -7,6 +7,8 @@
     <!--<script defer src="scripts/sendRequestUtility.js"></script>-->
     <link rel="stylesheet" href="styles/navbar.css" />
     <link rel="stylesheet" href="styles/homepage.css" />
+    <script defer src="scripts/sendRequestUtility.js"></script>
+    <script defer src="scripts/homepage.js"></script>
 
 </head>
 
@@ -34,7 +36,7 @@
             <section>
                 <header>
                     <h3 class="lastReadDesc"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus diam
-                        erat, pulvinar pulvinar imperdiet quis, sodales vitae sapien. Duis sit amet justo a ante tempor
+                        erat, pulvinarpulvinar imperdiet quis, sodales vitae sapien. Duis sit amet justo a ante tempor
                         porta quis quis nisi. Ut eget fermentum velit. Nunc ut quam condimentum, interdum mauris sed,
                         bibendum tortor. Etiam at massa facilisis, fermentum mauris vel, molestie massa. Nulla semper,
                         tellus at pretium accumsan, urna erat tempus massa, at dignissim ante nisi non quam. Lorem ipsum
@@ -46,10 +48,36 @@
 
         <header>
             <h1 class="pageSection">Checked out books</h1>
+            <table id="checkedBooks">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Author</th>
+                        <th>Check-out date</th>
+                        <th>Due Date</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
         </header>
 
         <header>
             <h1 class="pageSection">Checked out referats</h1>
+            <table id="checkedReferats">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Author</th>
+                        <th>Check-out date</th>
+                        <th>Due Date</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
         </header>
 
     </main>
