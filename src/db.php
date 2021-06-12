@@ -67,7 +67,7 @@ class Database {
     $sql = "INSERT INTO taken_books(user_id, book_id, expiration_data) VALUES (:user_id, :bookid, :expDate)";
     $this->checkoutBook = $this->connection->prepare($sql);
 
-    $sql = "DELETE FROM `taken_books` WHERE book_id=:bookid";
+    $sql = "DELETE FROM `taken_books` WHERE id=:bookid";
     $this->returnBook = $this->connection->prepare($sql);
 
   }

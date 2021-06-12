@@ -33,10 +33,8 @@ function load(response) {
 }
 
 function appendCheckedBooksTable(bookInfo) {
-    console.error("123");
 
     var booksTbody = document.querySelector('#checkedBooks tbody');
-
     var tr = document.createElement('tr');
     tr.setAttribute('class', 'book');
 
@@ -58,7 +56,7 @@ function appendCheckedBooksTable(bookInfo) {
     var returnButton = document.createElement('button');
     returnButton.innerHTML = 'Return';
     returnButton.addEventListener("click", function () {
-        returnBook(bookInfo.bookID);
+        returnBook(bookInfo.id);
     });
 
     var actionsTd = document.createElement('td');
@@ -111,7 +109,7 @@ function appendCheckedRefsTable(bookInfo) {
     var returnButton = document.createElement('button');
     returnButton.innerHTML = 'Return';
     returnButton.addEventListener("click", function () {
-        returnBook(bookInfo.bookID);
+        returnBook(bookInfo.id);
     });
     var actionsTd = document.createElement('td');
     actionsTd.append(viewButton, returnButton);
@@ -122,8 +120,13 @@ function appendCheckedRefsTable(bookInfo) {
 
 function loadTables(bookData) {
     console.log("Generating tables");
+    var booksTbody = document.querySelector('#checkedBooks tbody');
+            booksTbody.innerHTML = "";
+    var booksTbody = document.querySelector('#checkedReferats tbody');
+            booksTbody.innerHTML = "";
     bookData.forEach(function (bookInfo) {
         if (bookInfo.type == "book") {
+            
             appendCheckedBooksTable(bookInfo);
         }
         else {
