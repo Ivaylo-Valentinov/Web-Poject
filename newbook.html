@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>Bookaloo</title>
+    <link rel="stylesheet" href="styles/forms.css" />
+    <script defer src="scripts/newbook.js"></script>
+</head>
+
+<body>
+    <header>
+        <h1 class="title">Bookaloo</h1>
+    </header>
+    <main>
+        <header>
+            <h2 class="formTitle">Add new content</h2>
+        </header>
+        <form>
+            <input id="title" placeholder="Title" type="text" required>
+            <input id="author" placeholder="Author" type="text" required>
+            <input id="desc" placeholder="Description" type="text" required>
+            <input id="count" placeholder="Count" type="number" required>
+            <select id="type">
+                <option value="Book" selected>Book</option>
+                <option value="Ref">Referat</option>
+            </select>
+            <input id="file" placeholder="Upload PDF" type="file" required>
+            <input id="add-book-btn" class="button" type="submit" value="Add Book">
+            <label id="errors"></label>
+        </form>
+    </main>
+</body>
+</html>
