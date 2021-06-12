@@ -1,5 +1,9 @@
 (function() {
     sendRequest('src/books.php', {method: 'GET'}, loadBooks, console.log);
+
+    var searchBtn = document.getElementById('searchBtn');
+    searchBtn.addEventListener('click', sendBookRequest);
+
 })();
 
 function appendTable(bookInfo) {
@@ -33,6 +37,20 @@ function appendTable(bookInfo) {
     booksTbody.appendChild(tr);
 }
 
+function sendBookRequest(event) {
+    event.preventDefault();
+
+     var searchInfo = document.getElementById("searchBar").value;
+
+    if(searchInfo.length > 0) {
+
+        var request = {
+            searchInfo
+        }
+        sendRequest('src/searchBooks.php', {method: 'POST', data: `data=${JSON.stringify(request)}`}, loadSpecificBooks, console.log);
+    }
+}
+
 function loadBooks(booksData) {
     booksData.forEach(function (bookInfo) {
         appendTable(bookInfo);
@@ -41,4 +59,16 @@ function loadBooks(booksData) {
 
 function openBookPage(link) {
     window.location = 'book.html?bookId=' + link;
+}
+
+function loadSpecificBooks(booksData) {
+ 
+    var booksTbody = document.querySelector('#books tbody');
+    while (booksTbody.firstChild) {
+        booksTbody.removeChild(booksTbody.firstChild);
+    }
+
+    booksData.forEach(function (bookInfo) {
+        appendTable(bookInfo);
+    });
 }

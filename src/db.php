@@ -40,7 +40,7 @@ class Database {
     $sql = "INSERT INTO books(title, author, description, count, type, link) VALUES(:title, :author, :description, :count, :type, :link)";
     $this->insertBook = $this->connection->prepare($sql);
 
-    $sql = "SELECT * FROM books";
+    $sql = "SELECT * FROM books WHERE type = :type";
     $this->selectAllBooks = $this->connection->prepare($sql);
 
     $sql = "SELECT * FROM users WHERE username = :username";
@@ -67,8 +67,14 @@ class Database {
     $sql = "INSERT INTO taken_books(user_id, book_id, expiration_data) VALUES (:user_id, :bookid, :expDate)";
     $this->checkoutBook = $this->connection->prepare($sql);
 
-    $sql = "DELETE FROM `taken_books` WHERE book_id=:bookId";
+    $sql = "DELETE FROM `taken_books` WHERE id=:bookid";
     $this->returnBook = $this->connection->prepare($sql);
+
+    $sql = "SELECT * FROM books WHERE type = :type";
+    $this->selectAllReferats = $this->connection->prepare($sql);
+
+    $sql = "SELECT * FROM books WHERE title LIKE CONCAT('%', :title, '%') AND type = :type";
+    $this->selectSpecificReading = $this->connection->prepare($sql);
 
   }
 
@@ -82,9 +88,9 @@ class Database {
     }
   }
 
-  public function selectAllBooksQuery() {
+  public function selectAllBooksQuery($data) {
     try {
-      $this->selectAllBooks->execute();
+      $this->selectAllBooks->execute($data);
 
       return ["success" => true, "data" => $this->selectAllBooks];
     } catch(PDOException $e) { 
@@ -122,6 +128,26 @@ class Database {
         return ["success" => true, "data" => $this->selectUser];
     } catch(PDOException $e) {
         return ["success" => false, "error" => $e->getMessage()];
+    }
+  }
+
+  public function selectAllReferatsQuery($data) {
+    try{
+      $this->selectAllReferats->execute($data);
+
+      return ["success" => true, "data" => $this->selectAllReferats];
+    }catch(PDOException $e) {
+      return ["success" => false, "error" => $e->getMessage()];
+    }
+  }
+
+  public function selectSpecificReadingQuery($data) {
+    try{
+      $this->selectSpecificReading->execute($data);
+
+      return ["success" => true, "data" => $this->selectSpecificReading];
+    }catch(PDOException $e) {
+      return ["success" => false, "error" => $e->getMessage()];
     }
   }
   

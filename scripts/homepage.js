@@ -1,7 +1,7 @@
 (function () {
     console.log("Entering homepage script");
 
-        requestTakenBooks();
+    requestTakenBooks();
 })();
 
 function requestTakenBooks() {
@@ -33,8 +33,8 @@ function load(response) {
 }
 
 function appendCheckedBooksTable(bookInfo) {
-    var booksTbody = document.querySelector('#checkedBooks tbody');
 
+    var booksTbody = document.querySelector('#checkedBooks tbody');
     var tr = document.createElement('tr');
     tr.setAttribute('class', 'book');
 
@@ -55,14 +55,35 @@ function appendCheckedBooksTable(bookInfo) {
 
     var returnButton = document.createElement('button');
     returnButton.innerHTML = 'Return';
+    returnButton.addEventListener("click", function () {
+        returnBook(bookInfo.id);
+    });
 
     var actionsTd = document.createElement('td');
     actionsTd.append(viewButton, returnButton);
 
-    tr.append(titleTd, authorTd, checkoutTd, expirationTd, actionsTd );
+    tr.append(titleTd, authorTd, checkoutTd, expirationTd, actionsTd);
     booksTbody.appendChild(tr);
 }
 
+function returnBook(bookID) {
+    /**
+        * Create an object with the user's data
+        */
+
+    console.log("HELP I WAS CLICKED!!!!");
+    var user = {
+        bookid: bookID,
+        opType: "return"
+    };
+
+
+    /**
+     * Send POST request with user's data to api.php/login
+     */
+    sendRequest('src/libraryUtility.php', { method: 'POST', data: `data=${JSON.stringify(user)}` }, requestTakenBooks, console.log);
+
+}
 
 function appendCheckedRefsTable(bookInfo) {
     var booksTbody = document.querySelector('#checkedReferats tbody');
@@ -87,7 +108,9 @@ function appendCheckedRefsTable(bookInfo) {
 
     var returnButton = document.createElement('button');
     returnButton.innerHTML = 'Return';
-
+    returnButton.addEventListener("click", function () {
+        returnBook(bookInfo.id);
+    });
     var actionsTd = document.createElement('td');
     actionsTd.append(viewButton, returnButton);
 
@@ -95,15 +118,20 @@ function appendCheckedRefsTable(bookInfo) {
     booksTbody.appendChild(tr);
 }
 
-function loadTables (bookData) {
+function loadTables(bookData) {
     console.log("Generating tables");
+    var booksTbody = document.querySelector('#checkedBooks tbody');
+    booksTbody.innerHTML = "";
+    var referatsTbody = document.querySelector('#checkedReferats tbody');
+    referatsTbody.innerHTML = "";
     bookData.forEach(function (bookInfo) {
-        if(bookInfo.type == "book"){
+        if (bookInfo.type == "book") {
+
             appendCheckedBooksTable(bookInfo);
         }
-        else{
+        else {
             appendCheckedRefsTable(bookInfo);
         }
-        
+
     });
 }
