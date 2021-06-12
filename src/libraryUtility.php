@@ -20,12 +20,18 @@ if(isset($_POST)){
             
             $db = new Database();
             $lib = new Librarian();
+            $opType = $data["opType"];
 
-            $query = $db->getTakenBooks(["cuid" => $_SESSION['user_id']]);
-
+            if($opType == "check"){
+                $query = $db->checkoutBook(["user_id" => $_SESSION['user_id'], "bookid"=> $data["bookid"], "expDate"=>'2021-07-06']);
+            }
+            else{
+                $query = $db->returnBook(["bookid" => $data["bookid"]]);
+                print_r($data);
+            }
 
             if ($query["success"]) {
-                $response =  ["success" => true,"userID"=>$isValid ,"data" =>$query["data"]->fetchAll(PDO::FETCH_ASSOC)];
+                $response =  ["success" => true, "thing"=>" "];
             } else {
                 $errors[] = $query["error"];
             }
