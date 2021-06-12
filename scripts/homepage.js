@@ -121,12 +121,12 @@ function appendCheckedRefsTable(bookInfo) {
 function loadTables(bookData) {
     console.log("Generating tables");
     var booksTbody = document.querySelector('#checkedBooks tbody');
-            booksTbody.innerHTML = "";
-    var booksTbody = document.querySelector('#checkedReferats tbody');
-            booksTbody.innerHTML = "";
+    booksTbody.innerHTML = "";
+    var referatsTbody = document.querySelector('#checkedReferats tbody');
+    referatsTbody.innerHTML = "";
     bookData.forEach(function (bookInfo) {
         if (bookInfo.type == "book") {
-            
+
             appendCheckedBooksTable(bookInfo);
         }
         else {
