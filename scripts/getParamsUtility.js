@@ -1,4 +1,4 @@
-var getParams = function (url) {
+function getParams(url) {
 	var params = {};
 	var parser = document.createElement('a');
 	parser.href = url;
