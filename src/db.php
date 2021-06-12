@@ -61,7 +61,7 @@ class Database {
     $sql = "SELECT * FROM taken_books tb JOIN books b ON tb.book_id = b.id WHERE user_id=:cuid ";
     $this->getTakenBooks = $this->connection->prepare($sql);
 
-    $sql = "UPDATE books SET checkout_amount = checkout_amount+1 WHERE id =:bookId";
+    $sql = "UPDATE books SET checkout_amount = checkout_amount+1 WHERE id =:bookId;"
     $this->incrementCheckoutCount = $this->connection->prepare($sql);
     
     $sql = "INSERT INTO taken_books(user_id, book_id, expiration_data) VALUES (:user_id, :bookid, :expDate)";

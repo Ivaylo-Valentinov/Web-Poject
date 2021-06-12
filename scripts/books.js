@@ -19,9 +19,6 @@ function appendTable(bookInfo) {
 
     var viewButton = document.createElement('button');
     viewButton.innerHTML = 'View';
-    viewButton.addEventListener('click', function() {
-        openBookPage(bookInfo.link);
-    });
 
     var checkOutButton = document.createElement('button');
     checkOutButton.innerHTML = 'Check out';
@@ -37,8 +34,4 @@ function loadBooks(booksData) {
     booksData.forEach(function (bookInfo) {
         appendTable(bookInfo);
     });
-}
-
-function openBookPage(link) {
-    window.location = 'book.html?bookId=' + link;
 }
