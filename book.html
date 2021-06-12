@@ -4,13 +4,13 @@
         <meta charset="utf-8"/>
         <title>Bookaloo</title>
         <link rel="stylesheet" href="styles/book.css"/>
-        <script defer src="scripts/sendRequestUtility.js"></script>
+        <script defer src="scripts/getParamsUtility.js"></script>
         <script defer src="scripts/book.js"></script>
     </head>
     <body>
         <main>
-            <object data="pdfs/StoryHouse_Presentation.pdf" type="application/pdf">
-                alt : <a href="pdfs/StoryHouse_Presentation.pdf">StoryHouse_Presentation</a>
+            <object id="book-object" type="application/pdf">
+                alt : <a id="book-link"></a>
             </object>
         </main>
     </body>
