@@ -1,12 +1,12 @@
 <?php
-  require_once "referat.php";
+  require_once "book.php";
   require_once "requestUtility.php";
 
  // header("Content-Type: application/json");
 
   $errors = [];
   $response = [];
-  $referat = new Referat();
+  $book = new Book();
 
   if ($_SERVER["REQUEST_METHOD"] === "GET") {
    //TO DO
@@ -15,7 +15,7 @@
     $data = json_decode($_POST["data"], true);
 
     $search = isset($data['searchInfo']) ? RequestUtility::testInput($data['searchInfo']) : null;
-    $result = $referat->getSpecificReferat($search);
+    $result = $book->getSpecificBook($search);
     
     if ($result["success"]) {
       $response = $result["data"];

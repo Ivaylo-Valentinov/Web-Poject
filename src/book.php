@@ -20,6 +20,17 @@ class Book {
     }
   }
 
+  public function getSpecificBook($title) {
+
+    $query = $this->db->selectSpecificReadingQuery(["title" => $title, "type" => $this->type]);
+
+    if ($query["success"]) {
+      return ["success" => true, "data" => $query["data"]->fetchAll(PDO::FETCH_ASSOC)];
+    } else {
+      return $query;
+    }
+  }
+
   public function insertBook($title, $author, $description, $count, $link) {
     $validate = $this->validateString($title);
     if (!$validate["success"]) {

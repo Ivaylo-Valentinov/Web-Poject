@@ -61,7 +61,7 @@ class Database {
     $sql = "SELECT * FROM taken_books tb JOIN books b ON tb.book_id = b.id WHERE user_id=:cuid ";
     $this->getTakenBooks = $this->connection->prepare($sql);
 
-    $sql = "UPDATE books SET checkout_amount = checkout_amount+1 WHERE id =:bookId;"
+    $sql = "UPDATE books SET checkout_amount = checkout_amount+1 WHERE id =:bookId";
     $this->incrementCheckoutCount = $this->connection->prepare($sql);
     
     $sql = "INSERT INTO taken_books(user_id, book_id, expiration_data) VALUES (:user_id, :bookid, :expDate)";
@@ -73,7 +73,7 @@ class Database {
     $sql = "SELECT * FROM books WHERE type = :type";
     $this->selectAllReferats = $this->connection->prepare($sql);
 
-    $sql = "SELECT * FROM books WHERE title = :title AND type = :type";
+    $sql = "SELECT * FROM books WHERE title LIKE CONCAT('%', :title, '%') AND type = :type";
     $this->selectSpecificReading = $this->connection->prepare($sql);
 
   }

@@ -22,8 +22,6 @@ class Referat {
 
   public function getSpecificReferat($title) {
 
-    echo $title;
-
     $query = $this->db->selectSpecificReadingQuery(["title" => $title, "type" => $this->type]);
 
     if ($query["success"]) {

@@ -10,7 +10,7 @@ function appendTable(referatInfo) {
     var referatsTbody = document.querySelector('#referats tbody');
 
     var tr = document.createElement('tr');
-    tr.setAttribute('class', 'student');//whyy
+    tr.setAttribute('class', 'student');
 
     var nameTd = document.createElement('td');
     nameTd.innerHTML = referatInfo.title;
@@ -53,12 +53,14 @@ function loadReferats(referatsData) {
 }
 
 function loadSpecificReferats(referatsData) {
-    var sBtn = document.getElementById('searchBtn');
-    var p = document.createElement('p');
-    p.innerHTML = "Here";
-    sBtn.after(p);    
+    
+    var referatsTbody = document.querySelector('#referats tbody');
+    while (referatsTbody.firstChild) {
+        referatsTbody.removeChild(referatsTbody.firstChild);
+    }
 
     referatsData.forEach(function (referatInfo) {
         appendTable(referatInfo);
     });
 }
+
