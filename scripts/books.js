@@ -33,7 +33,6 @@ function appendTable(bookInfo) {
     var checkOutButton = document.createElement('button');
     checkOutButton.innerHTML = 'Check out';
     checkOutButton.addEventListener("click", function () {
-        console.log("Calling checkout");
         checkoutBook(bookInfo.id);
     });
 
@@ -85,7 +84,6 @@ function checkoutBook(bookID) {
         * Create an object with the user's data
         */
 
-       console.log("HELP I WAS CLICKED!!!!");
        var user = {
            bookid: bookID,
            opType: "check"
