@@ -1,10 +1,13 @@
 (function() {
-    sendRequest('src/books.php', {method: 'GET'}, loadBooks, console.log);
-
+    initalLoad();
     var searchBtn = document.getElementById('searchBtn');
     searchBtn.addEventListener('click', sendBookRequest);
 
 })();
+
+function initalLoad() {
+    sendRequest('src/books.php', {method: 'GET'}, loadBooks, console.log);
+}
 
 function appendTable(bookInfo) {
     var booksTbody = document.querySelector('#books tbody');
@@ -29,6 +32,9 @@ function appendTable(bookInfo) {
 
     var checkOutButton = document.createElement('button');
     checkOutButton.innerHTML = 'Check out';
+    checkOutButton.addEventListener("click", function () {
+        checkoutBook(bookInfo.id);
+    });
 
     var actionsTd = document.createElement('td');
     actionsTd.append(viewButton, checkOutButton);
@@ -52,6 +58,8 @@ function sendBookRequest(event) {
 }
 
 function loadBooks(booksData) {
+    var booksTbody = document.querySelector('#books tbody');
+    booksTbody.innerHTML = "";
     booksData.forEach(function (bookInfo) {
         appendTable(bookInfo);
     });
@@ -71,4 +79,22 @@ function loadSpecificBooks(booksData) {
     booksData.forEach(function (bookInfo) {
         appendTable(bookInfo);
     });
+}
+
+function checkoutBook(bookID) {
+     /**
+        * Create an object with the user's data
+        */
+
+       var user = {
+           bookid: bookID,
+           opType: "check"
+       };
+   
+   
+       /**
+        * Send POST request with user's data to api.php/login
+        */
+       sendRequest('src/libraryUtility.php', { method: 'POST', data: `data=${JSON.stringify(user)}` }, initalLoad, console.log);
+   
 }
