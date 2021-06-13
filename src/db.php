@@ -64,7 +64,7 @@ class Database {
     $sql = "UPDATE books SET checkout_amount = checkout_amount+1 WHERE id =:bookId";
     $this->incrementCheckoutCount = $this->connection->prepare($sql);
     
-    $sql = "INSERT INTO taken_books(user_id, book_id, expiration_data) VALUES (:user_id, :bookid, :expDate)";
+    $sql = "INSERT INTO taken_books(user_id, book_id, expiration_date) VALUES (:user_id, :bookid, :expDate)";
     $this->checkoutBook = $this->connection->prepare($sql);
 
     $sql = "DELETE FROM `taken_books` WHERE id=:bookid";

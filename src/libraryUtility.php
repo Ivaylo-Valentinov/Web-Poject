@@ -48,7 +48,6 @@ if(isset($_POST)){
 
     if ($errors) {
         http_response_code(400);    
-    
         echo json_encode($errors);
       }
       else{

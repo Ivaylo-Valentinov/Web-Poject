@@ -1,4 +1,5 @@
 function sendRequest(url, options, successCallback, errorCallback) {
+    console.log("caling send req");
     var request = new XMLHttpRequest();
     
     request.addEventListener('load', function() { 
@@ -16,6 +17,8 @@ function sendRequest(url, options, successCallback, errorCallback) {
             console.log(response);
             successCallback(response);
         } else {
+            console.log("Calling error callback");
+            console.log(response);
             errorCallback(response);
         }
     });
