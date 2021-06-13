@@ -2,22 +2,20 @@
     console.log("Entering homepage script");
 
     requestTakenBooks();
-        /**
-     * Get the login button
-     */
-    var addBtn = document.getElementById('addBook');
 
-    /**
-     * Listen for click event on the login button
-     */
+    var addBtn = document.getElementById('addBook');
     addBtn.addEventListener('click', directToAddBook);
 
+    var addBtn = document.getElementById('addReferat');
+    addBtn.addEventListener('click', directToAddReferat);
 })();
 
 function directToAddBook(){
-    console.log("Directing.");
     window.location = 'newbook.html';
+}
 
+function directToAddReferat(){
+    window.location = 'newreferat.html';
 }
 
 function requestTakenBooks() {

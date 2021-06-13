@@ -1,5 +1,5 @@
 (function() {
-    var submitButton = document.getElementById('add-book-btn');
+    var submitButton = document.getElementById('add-referat-btn');
   
     submitButton.addEventListener('click', sendForm);
 })();
@@ -11,10 +11,10 @@ function sendForm(event) {
     var author = document.getElementById('author').value;
     var desc = document.getElementById('desc').value;
     var count = document.getElementById('count').value;
-    var file = document.getElementById('file').files[0];
+    var link = document.getElementById('link').value;
 
-    if (!file) {
-        errors.innerHTML = "You should upload a book!";
+    if (!link) {
+        errors.innerHTML = "You should upload a referat link!";
         return;
     }
 
@@ -24,12 +24,13 @@ function sendForm(event) {
     formdata.append('author', author);
     formdata.append('desc', desc);
     formdata.append('count', count);
-    formdata.append('type', "book");
+    formdata.append('type', "ref");
+    formdata.append('link', link);
 
-    formdata.append("file", file, file.name);
+    
 
     var request = new XMLHttpRequest();
-    request.open('POST', 'src/books.php', true);
+    request.open('POST', 'src/referats.php', true);
     request.send(formdata);
     request.addEventListener('load', function() {
         var response = JSON.parse(request.responseText);
