@@ -2,8 +2,6 @@
   require_once "referat.php";
   require_once "requestUtility.php";
 
-  header("Content-Type: application/json");
-
   $errors = [];
   $response = [];
   $referat = new Referat();
