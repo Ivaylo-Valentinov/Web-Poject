@@ -16,6 +16,8 @@ function sendRequest(url, options, successCallback, errorCallback) {
             console.log(response);
             successCallback(response);
         } else {
+            console.log("Calling error callback");
+            console.log(response);
             errorCallback(response);
         }
     });
