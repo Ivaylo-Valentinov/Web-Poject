@@ -18,6 +18,10 @@
            
         }
 
+        public function isTaken ($user_id, $book_id) {
+
+        }
+
        
     }
 ?>
