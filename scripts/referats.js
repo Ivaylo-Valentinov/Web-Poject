@@ -34,7 +34,19 @@ function appendTable(referatInfo) {
 function sendReferatRequest(event) {
     event.preventDefault();
 
-     var searchInfo = document.getElementById("searchBar").value;
+    var closing = document.getElementsByClassName('cancel');
+    if(closing.length === 0) {
+        var cancelBtn = document.createElement('button');
+        cancelBtn.innerHTML = 'Cancel Search';
+        cancelBtn.setAttribute('class', 'cancel');
+        cancelBtn.addEventListener('click', cancelSearch);
+
+        var searchBtn = document.getElementById('searchBtn');
+        searchBtn.after(cancelBtn);
+    }
+
+
+    var searchInfo = document.getElementById("searchBar").value;
 
     if(searchInfo.length > 0) {
 
@@ -44,6 +56,24 @@ function sendReferatRequest(event) {
 
         sendRequest('src/searchReferat.php', {method: 'POST', data: `data=${JSON.stringify(request)}`}, loadSpecificReferats, console.log);
     }
+}
+
+function cancelSearch(event) {
+    event.preventDefault();
+
+    var referatsTbody = document.querySelector('#referats tbody');
+    while (referatsTbody.firstChild) {
+        referatsTbody.removeChild(referatsTbody.firstChild);
+    }
+
+    sendRequest('src/referats.php', {method: 'GET'}, loadReferats, console.log);
+    
+    var searchBar = document.getElementById('searchBar');
+    searchBar.value = '';
+
+    var cancelBtn = document.getElementsByClassName('cancel')[0];
+    cancelBtn.parentNode.removeChild(cancelBtn);
+
 }
 
 function loadReferats(referatsData) {
