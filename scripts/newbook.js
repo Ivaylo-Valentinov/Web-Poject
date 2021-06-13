@@ -46,7 +46,7 @@ function sendForm(event) {
 
 function onAddedBook() {
     alert("Success");
-    window.location = 'homepage.html';
+    window.location = 'index.html';
 }
 
 function onError(response) {
