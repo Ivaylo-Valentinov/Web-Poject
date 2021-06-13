@@ -27,7 +27,7 @@ function appendTable(bookInfo) {
     var viewButton = document.createElement('button');
     viewButton.innerHTML = 'View';
     viewButton.addEventListener('click', function() {
-        openBookPage(bookInfo.link);
+        openBookPage(bookInfo.id);
     });
 
     var checkOutButton = document.createElement('button');
