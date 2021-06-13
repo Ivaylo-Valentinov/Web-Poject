@@ -13,6 +13,7 @@ class Database {
   private $checkoutBook;
   private $returnBook;
   private $incrementCheckoutCount;
+  private $checkTakenStatus;
 
   public function __construct() {
     $config = parse_ini_file('../config/config.ini', true);
@@ -68,10 +69,10 @@ class Database {
     $sql = "UPDATE books SET checkout_amount = checkout_amount+1 WHERE id =:bookId";
     $this->incrementCheckoutCount = $this->connection->prepare($sql);
     
-    $sql = "INSERT INTO taken_books(user_id, book_id, expiration_data) VALUES (:user_id, :bookid, :expDate)";
+    $sql = "INSERT INTO taken_books(user_id, book_id, expiration_date) VALUES (:user_id, :bookid, :expDate)";
     $this->checkoutBook = $this->connection->prepare($sql);
 
-    $sql = "DELETE FROM `taken_books` WHERE id=:bookid";
+    $sql = "DELETE FROM `taken_books` WHERE book_id=:bookid";
     $this->returnBook = $this->connection->prepare($sql);
 
     $sql = "SELECT * FROM books WHERE type = :type";
@@ -79,6 +80,9 @@ class Database {
 
     $sql = "SELECT * FROM books WHERE title LIKE CONCAT('%', :title, '%') AND type = :type";
     $this->selectSpecificReading = $this->connection->prepare($sql);
+
+    $sql = "SELECT * FROM `taken_books` WHERE book_id=:bookid && user_id =:userid";
+    $this->checkTakenStatus = $this->connection->prepare($sql);
 
   }
 
@@ -230,6 +234,16 @@ class Database {
           return ["success" => false, "error" => "Connection failed: " . $e->getMessage()];
       }
   }
+
+  public function isBookTaken($data) {
+    try {
+        $this->checkTakenStatus->execute($data);
+
+        return ["success" => true, "data" => $this->checkTakenStatus];
+      } catch(PDOException $e) {
+        return ["success" => false, "error" => "Connection failed: " . $e->getMessage()];
+    }
+}
 
   public function returnBook($data) {
     try {

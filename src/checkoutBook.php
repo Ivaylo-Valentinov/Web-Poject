@@ -17,7 +17,7 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
         if ($isValid["success"]) {
             $bookId = isset($_GET['id']) ? RequestUtility::testInput($_GET['id']) : 0;
             
-            if ($librarian->isTaken($_SESSION['user_id'], $bookId)) {
+            if ($librarian->isTakenSecond($_SESSION['user_id'], $bookId)) {
                 $request = $book->getBookById($bookId);
 
                 if ($request["success"]) {
