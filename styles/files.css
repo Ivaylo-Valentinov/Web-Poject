@@ -36,3 +36,19 @@ button {
     width: 25%;
     height: 30px;
 }
+
+.cancel {
+    font-weight: bold;
+    width: 8%;
+    height: 30px;
+    background-color: #F6A106;
+    color: #faebd1;
+    border: none;
+    margin-left: 20px;
+}
+
+.cancel:hover {
+    background-color: #faebd1;
+    color: #F6A106;
+    cursor: pointer;
+}
