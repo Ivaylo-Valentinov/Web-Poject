@@ -58,6 +58,8 @@ function sendBookRequest(event) {
 }
 
 function loadBooks(booksData) {
+    var booksTbody = document.querySelector('#books tbody');
+    booksTbody.innerHTML = "";
     booksData.forEach(function (bookInfo) {
         appendTable(bookInfo);
     });

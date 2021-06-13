@@ -26,8 +26,7 @@ if(isset($_POST)){
                 $errors[] = $query["error"];
             }
         } 
-        else 
-        {
+        else{
             $response =  ["success" => "Invalid cookie", "data" =>$isValid];
         }
     } else {
