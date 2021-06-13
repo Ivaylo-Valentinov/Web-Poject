@@ -37,6 +37,10 @@ input, select {
     transform: scale(1.5);
 }
 
+select {
+    width: 66%;
+}
+
 .button {
     width: 80px;
     font-weight: bold;
