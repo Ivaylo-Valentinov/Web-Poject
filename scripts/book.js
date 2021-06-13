@@ -1,7 +1,7 @@
 (function () {
     var params = getParams(window.location.href);
     if (!params.bookId) {
-        window.location = 'homepage.html';
+        window.location = 'index.html';
     }
 
     var bookObject = document.getElementById('book-object');
