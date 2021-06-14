@@ -108,7 +108,6 @@ class Database {
 
   public function selectUserQuery($data) {
     try {
-        // ["user" => "..."]
         $this->selectUser->execute($data);
 
         return ["success" => true, "data" => $this->selectUser];
@@ -130,7 +129,6 @@ class Database {
   
   public function selectUserByEmailQuery($email) {
     try {
-        // ["user" => "..."]
         $this->selectUser->execute($email);
 
         return ["success" => true, "data" => $this->selectUser];
@@ -227,12 +225,18 @@ class Database {
 
     public function checkoutBook($data) {
       try {
+          $this->connection->beginTransaction();
+
           $this->checkoutBook->execute($data);
+          $this->incrementCheckoutCount->execute(["bookId" => $data["bookid"]]);
+
+          $this->connection->commit();
 
           return ["success" => true, "data" => $this->checkoutBook];
         } catch(PDOException $e) {
-          return ["success" => false, "error" => "Connection failed: " . $e->getMessage()];
-      }
+            $this->connection->rollBack();
+            return ["success" => false, "error" => "Connection failed: " . $e->getMessage()];
+        }
   }
 
   public function isBookTaken($data) {

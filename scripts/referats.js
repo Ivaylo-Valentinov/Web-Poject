@@ -1,37 +1,46 @@
 (function() {
-    sendRequest('src/referats.php', {method: 'GET'}, loadReferats, console.log);
-
+    initalLoad();
     var searchBtn = document.getElementById('searchBtn');
-    searchBtn.addEventListener('click', sendReferatRequest);
+    searchBtn.addEventListener('click', sendBookRequest);
 
 })();
 
-function appendTable(referatInfo) {
-    var referatsTbody = document.querySelector('#referats tbody');
+function initalLoad() {
+    sendRequest('src/referats.php', {method: 'GET'}, loadBooks, console.log);
+}
+
+function appendTable(bookInfo) {
+    var booksTbody = document.querySelector('#referats tbody');
 
     var tr = document.createElement('tr');
-    tr.setAttribute('class', 'student');
+    tr.setAttribute('class', 'book');
 
-    var nameTd = document.createElement('td');
-    nameTd.innerHTML = referatInfo.title;
+    var titleTd = document.createElement('td');
+    titleTd.innerHTML = bookInfo.title;
 
     var authorTd = document.createElement('td');
-    authorTd.innerHTML = referatInfo.author;
+    authorTd.innerHTML = bookInfo.author;
 
     var viewButton = document.createElement('button');
     viewButton.innerHTML = 'View';
+    viewButton.addEventListener('click', function() {
+        openBookPage(bookInfo.id);
+    });
 
     var checkOutButton = document.createElement('button');
     checkOutButton.innerHTML = 'Check out';
+    checkOutButton.addEventListener("click", function () {
+        checkoutBook(bookInfo.id);
+    });
 
     var actionsTd = document.createElement('td');
     actionsTd.append(viewButton, checkOutButton);
 
-    tr.append(nameTd, authorTd, actionsTd);
-    referatsTbody.appendChild(tr);
+    tr.append(titleTd, authorTd, actionsTd);
+    booksTbody.appendChild(tr);
 }
 
-function sendReferatRequest(event) {
+function sendBookRequest(event) {
     event.preventDefault();
 
     var closing = document.getElementsByClassName('cancel');
@@ -46,27 +55,26 @@ function sendReferatRequest(event) {
     }
 
 
-    var searchInfo = document.getElementById("searchBar").value;
+     var searchInfo = document.getElementById("searchBar").value;
 
     if(searchInfo.length > 0) {
 
         var request = {
             searchInfo
         }
-
-        sendRequest('src/searchReferat.php', {method: 'POST', data: `data=${JSON.stringify(request)}`}, loadSpecificReferats, console.log);
+        sendRequest('src/searchReferat.php', {method: 'POST', data: `data=${JSON.stringify(request)}`}, loadSpecificBooks, console.log);
     }
 }
 
 function cancelSearch(event) {
     event.preventDefault();
 
-    var referatsTbody = document.querySelector('#referats tbody');
-    while (referatsTbody.firstChild) {
-        referatsTbody.removeChild(referatsTbody.firstChild);
+    var booksTbody = document.querySelector('#referats tbody');
+    while (booksTbody.firstChild) {
+        booksTbody.removeChild(booksTbody.firstChild);
     }
 
-    sendRequest('src/referats.php', {method: 'GET'}, loadReferats, console.log);
+    sendRequest('src/referats.php', {method: 'GET'}, loadBooks, console.log);
     
     var searchBar = document.getElementById('searchBar');
     searchBar.value = '';
@@ -76,21 +84,44 @@ function cancelSearch(event) {
 
 }
 
-function loadReferats(referatsData) {
-    referatsData.forEach(function (referatInfo) {
-        appendTable(referatInfo);
+function loadBooks(booksData) {
+    var booksTbody = document.querySelector('#referats tbody');
+    booksTbody.innerHTML = "";
+    booksData.forEach(function (bookInfo) {
+        appendTable(bookInfo);
     });
 }
 
-function loadSpecificReferats(referatsData) {
-    
-    var referatsTbody = document.querySelector('#referats tbody');
-    while (referatsTbody.firstChild) {
-        referatsTbody.removeChild(referatsTbody.firstChild);
+function openBookPage(link) {
+    window.location = 'book.html?bookId=' + link;
+}
+
+function loadSpecificBooks(booksData) {
+ 
+    var booksTbody = document.querySelector('#referats tbody');
+    while (booksTbody.firstChild) {
+        booksTbody.removeChild(booksTbody.firstChild);
     }
 
-    referatsData.forEach(function (referatInfo) {
-        appendTable(referatInfo);
+    booksData.forEach(function (bookInfo) {
+        appendTable(bookInfo);
     });
 }
 
+function checkoutBook(bookID) {
+     /**
+        * Create an object with the user's data
+        */
+
+       var user = {
+           bookid: bookID,
+           opType: "check"
+       };
+   
+   
+       /**
+        * Send POST request with user's data to api.php/login
+        */
+       sendRequest('src/libraryUtility.php', { method: 'POST', data: `data=${JSON.stringify(user)}` }, initalLoad, console.log);
+   
+}
