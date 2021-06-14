@@ -5,17 +5,10 @@
 
     var addBtn = document.getElementById('addBook');
     addBtn.addEventListener('click', directToAddBook);
-
-    var addBtn = document.getElementById('addReferat');
-    addBtn.addEventListener('click', directToAddReferat);
 })();
 
 function directToAddBook(){
     window.location = 'newbook.html';
-}
-
-function directToAddReferat(){
-    window.location = 'newreferat.html';
 }
 
 function requestTakenBooks() {
