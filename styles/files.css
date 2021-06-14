@@ -61,3 +61,18 @@ footer {
     height: 50px;
     margin-top: 10%;
 }
+
+.grid {
+    display: grid;
+    grid-template-columns: auto auto;
+    justify-items: center;
+}
+
+.most-read {
+    display: flex;
+    flex-direction: column;
+}
+
+p.centered {
+    text-align: center;
+}

@@ -19,6 +19,7 @@ CREATE TABLE `bookaloo`.`books` (
   `count` INT NOT NULL ,
   `type` VARCHAR(255) NOT NULL ,
   `link` VARCHAR(255) NOT NULL ,
+  `checkout_amount` INT NOT NULL DEFAULT 0 ,
   PRIMARY KEY (`id`)
 ) ENGINE = InnoDB;
 

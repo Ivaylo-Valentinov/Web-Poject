@@ -21,7 +21,6 @@ function sendForm(event) {
      */
     var username = document.getElementById('username').value;
     var password = document.getElementById('password').value;
-    var rememberMe = document.getElementById('remember-me').checked;
 
     /**
      * Create an object with the user's data
@@ -29,7 +28,6 @@ function sendForm(event) {
     var user = {
         username,
         password,
-        remember: rememberMe
     };
 
    

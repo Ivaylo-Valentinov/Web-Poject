@@ -24,14 +24,12 @@ if(isset($_POST)){
 
             if($opType == "check"){
                 $isTaken =$lib->isTaken($_SESSION['user_id'], $data["bookid"]);
-                if(!$isTaken){
-                    $query = $db->checkoutBook(["user_id" => $_SESSION['user_id'], "bookid"=> $data["bookid"], "expDate"=>'2021-07-06']);
-
+                if(!$isTaken) {
+                    $query = $db->checkoutBook(["user_id" => $_SESSION['user_id'], "bookid" => $data["bookid"], "expDate" => date('Y-m-d', strtotime("+20 days"))]);
                 }
                 else{
-                        $query = ["success"=>false, "error"=>"Book is taken!"];
+                    $query = ["success"=>false, "error"=>"Book is taken!"];
                 }
-                
             }
             else{
                 $query = $db->returnBook(["bookid" => $data["bookid"]]);
