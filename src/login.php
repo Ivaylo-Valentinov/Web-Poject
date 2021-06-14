@@ -36,16 +36,6 @@
                 $expires = time() + 30 * 24 * 60 * 60;
                 setcookie('token', $token, $expires, '/');
                 $tokenUtility->createToken($token, $_SESSION['userId'], $expires);
-
-                //$status ="Should've created token ";
-                // if ($data['remember']) {
-                //     // Create cookie for remembering the user
-                //     $tokenUtility = new TokenUtility();
-                //     $token = bin2hex(random_bytes(8));
-                //     $epxires = time() + 30 * 24 * 60 * 60;
-                //     setcookie('token', $token, $expires, '/');
-                //     $tokenUtility->createToken($token, $_SESSION['userId'], $expires);
-                // }
             } else {
                 $errors[] = $isValid['error'];
             }

@@ -7,11 +7,11 @@ class Referat {
 
   public function __construct() {
     $this->db = new Database();
-    $this->type = "referat";
+    $this->type = "ref";
   }
 
   public function getAllReferats() {
-    $query = $this->db->selectAllReferatsQuery(["type" => $this->type]);
+    $query = $this->db->selectAllBooksQuery(["type" => $this->type]);
 
     if ($query["success"]) {
       return ["success" => true, "data" => $query["data"]->fetchAll(PDO::FETCH_ASSOC)];
@@ -31,8 +31,36 @@ class Referat {
     }
   }
 
-  public function addReferat($title, $author, $description, $count, $link, $type = "referat") {
-    //validate....
+  public function getBookById($id) {
+    $query = $this->db->selectBookByIdQuery(["id" => $id]);
+    
+    if ($query["success"]) {
+      return ["success" => true, "data" => $query["data"]->fetch(PDO::FETCH_ASSOC)];
+    } else {
+      return $query;
+    }
+  }
+
+  public function insertReferat($title, $author, $description, $count, $link) {
+    $validate = $this->validateString($title);
+    if (!$validate["success"]) {
+      return $validate;
+    }
+
+    $validate = $this->validateString($author);
+    if (!$validate["success"]) {
+      return $validate;
+    }
+
+    $validate = $this->validateString($description);
+    if (!$validate["success"]) {
+      return $validate;
+    }
+
+    $validate = $this->validatePositiveNumber($count);
+    if (!$validate["success"]) {
+      return $validate;
+    }
 
     $query = $this->db->insertBookQuery([
       "title" => $title, 
@@ -40,11 +68,26 @@ class Referat {
       "description" => $description,
       "count" => $count,
       "link" => $link,
-      "type" =>  $type
+      "type" =>  $this->type
     ]);
 
     return $query;
   }
 
+    private function validateString($string) {
+        if (mb_strlen($string) === 0) {
+            return ["success" => false, "error" => "String must not be empty"];
+        }
+
+        return ["success" => true];
+    }
+
+    private function validatePositiveNumber($number) {
+        if (!is_numeric($number) || $number < 0) {
+            return ["success" => false, "error" => "Must be a positive number"];
+        }
+    
+        return ["success" => true];
+    }
 }
 ?>

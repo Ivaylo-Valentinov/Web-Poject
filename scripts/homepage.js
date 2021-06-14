@@ -66,6 +66,9 @@ function appendCheckedBooksTable(bookInfo) {
 
     var viewButton = document.createElement('button');
     viewButton.innerHTML = 'Read';
+    viewButton.addEventListener('click', function() {
+        openBookPage(bookInfo.id);
+    });
 
     var returnButton = document.createElement('button');
     returnButton.innerHTML = 'Return';
@@ -119,6 +122,9 @@ function appendCheckedRefsTable(bookInfo) {
 
     var viewButton = document.createElement('button');
     viewButton.innerHTML = 'Read';
+    viewButton.addEventListener('click', function() {
+        openBookPage(bookInfo.id);
+    });
 
     var returnButton = document.createElement('button');
     returnButton.innerHTML = 'Return';
@@ -148,4 +154,8 @@ function loadTables(bookData) {
         }
 
     });
+}
+
+function openBookPage(link) {
+    window.location = 'book.html?bookId=' + link;
 }

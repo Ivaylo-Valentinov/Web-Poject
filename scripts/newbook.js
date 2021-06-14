@@ -11,6 +11,8 @@ function sendForm(event) {
     var author = document.getElementById('author').value;
     var desc = document.getElementById('desc').value;
     var count = document.getElementById('count').value;
+    var type = document.getElementById('type').value;
+    var url = type === 'Book' ? 'src/books.php' : 'src/referats.php';
     var file = document.getElementById('file').files[0];
 
     if (!file) {
@@ -24,12 +26,12 @@ function sendForm(event) {
     formdata.append('author', author);
     formdata.append('desc', desc);
     formdata.append('count', count);
-    formdata.append('type', "book");
+    formdata.append('type', type);
 
     formdata.append("file", file, file.name);
 
     var request = new XMLHttpRequest();
-    request.open('POST', 'src/books.php', true);
+    request.open('POST', url, true);
     request.send(formdata);
     request.addEventListener('load', function() {
         var response = JSON.parse(request.responseText);
