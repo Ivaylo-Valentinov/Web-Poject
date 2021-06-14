@@ -52,15 +52,7 @@
                      * If the query was executed successfully we can return user's data
                      */
                     if($query["success"]) {
-                        /**
-                         * $query["data"] holds a PDO object with the result of the executed query.
-                         * We can get the data from the returned result as associative array, calling
-                         * the fetch(PDO::FETCH_ASSOC) method on $query["data"].
-                         */
-                        $foundUser = $query["data"]->fetch(PDO::FETCH_ASSOC);
                         $_SESSION["user_id"] = $userToken["user_id"];
-                        $user = new User($foundUser["username"],  $foundUser["password"]);
-                        $user->setEmail($foundUser["email"]);
 
                         return array("success" => true, "user" => $userToken["user_id"]);
                     } else {

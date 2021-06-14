@@ -5,6 +5,7 @@ class Database {
   private $insertBook;
   private $selectAllBooks;
   private $selectUser;
+  private $selectBookById;
   private $insertToken;
   private $selectToken;
   private $selectUserById;
@@ -46,6 +47,9 @@ class Database {
 
     $sql = "SELECT * FROM users WHERE username = :username";
     $this->selectUser = $this->connection->prepare($sql);
+
+    $sql = "SELECT * FROM books WHERE id = :id";
+    $this->selectBookById = $this->connection->prepare($sql);
 
     $sql = "INSERT INTO tokens(user_id, token,  expiration_date) VALUES (:user_id, :token,  :expiration_date)";
     $this->insertToken = $this->connection->prepare($sql);
@@ -199,6 +203,17 @@ class Database {
               return ["success" => false, "error" => $e->getMessage()];
           }
       }
+
+      public function selectBookByIdQuery($data) {
+        try{
+            $this->selectBookById->execute($data);
+
+            return array("success" => true, "data" => $this->selectBookById);
+        } catch(PDOException $e){
+
+            return ["success" => false, "error" => $e->getMessage()];
+        }
+    }
 
       public function getTakenBooks($data) {
         try {

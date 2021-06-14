@@ -27,7 +27,7 @@ function appendTable(bookInfo) {
     var viewButton = document.createElement('button');
     viewButton.innerHTML = 'View';
     viewButton.addEventListener('click', function() {
-        openBookPage(bookInfo.link);
+        openBookPage(bookInfo.id);
     });
 
     var checkOutButton = document.createElement('button');
@@ -46,6 +46,18 @@ function appendTable(bookInfo) {
 function sendBookRequest(event) {
     event.preventDefault();
 
+    var closing = document.getElementsByClassName('cancel');
+    if(closing.length === 0) {
+        var cancelBtn = document.createElement('button');
+        cancelBtn.innerHTML = 'Cancel Search';
+        cancelBtn.setAttribute('class', 'cancel');
+        cancelBtn.addEventListener('click', cancelSearch);
+
+        var searchBtn = document.getElementById('searchBtn');
+        searchBtn.after(cancelBtn);
+    }
+
+
      var searchInfo = document.getElementById("searchBar").value;
 
     if(searchInfo.length > 0) {
@@ -55,6 +67,24 @@ function sendBookRequest(event) {
         }
         sendRequest('src/searchBooks.php', {method: 'POST', data: `data=${JSON.stringify(request)}`}, loadSpecificBooks, console.log);
     }
+}
+
+function cancelSearch(event) {
+    event.preventDefault();
+
+    var booksTbody = document.querySelector('#books tbody');
+    while (booksTbody.firstChild) {
+        booksTbody.removeChild(booksTbody.firstChild);
+    }
+
+    sendRequest('src/books.php', {method: 'GET'}, loadBooks, console.log);
+    
+    var searchBar = document.getElementById('searchBar');
+    searchBar.value = '';
+
+    var cancelBtn = document.getElementsByClassName('cancel')[0];
+    cancelBtn.parentNode.removeChild(cancelBtn);
+
 }
 
 function loadBooks(booksData) {

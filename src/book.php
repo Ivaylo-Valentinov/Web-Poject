@@ -31,6 +31,16 @@ class Book {
     }
   }
 
+  public function getBookById($id) {
+    $query = $this->db->selectBookByIdQuery(["id" => $id]);
+    
+    if ($query["success"]) {
+      return ["success" => true, "data" => $query["data"]->fetch(PDO::FETCH_ASSOC)];
+    } else {
+      return $query;
+    }
+  }
+
   public function insertBook($title, $author, $description, $count, $link) {
     $validate = $this->validateString($title);
     if (!$validate["success"]) {
@@ -58,7 +68,7 @@ class Book {
       "description" => $description,
       "count" => $count,
       "link" => $link,
-      "type" =>  "book"
+      "type" =>  $this->type
     ]);
 
     return $query;
