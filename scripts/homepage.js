@@ -2,22 +2,13 @@
     console.log("Entering homepage script");
 
     requestTakenBooks();
-        /**
-     * Get the login button
-     */
+
     var addBtn = document.getElementById('addBook');
-
-    /**
-     * Listen for click event on the login button
-     */
     addBtn.addEventListener('click', directToAddBook);
-
 })();
 
 function directToAddBook(){
-    console.log("Directing.");
     window.location = 'newbook.html';
-
 }
 
 function requestTakenBooks() {

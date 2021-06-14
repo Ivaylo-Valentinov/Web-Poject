@@ -16,6 +16,7 @@ if(isset($_POST)){
     if ($_COOKIE['token']) {
         $tokenUtility = new TokenUtility();
         $isValid = $tokenUtility->checkToken($_COOKIE['token']);
+
         if ($isValid["success"]) {
             
             $db = new Database();
