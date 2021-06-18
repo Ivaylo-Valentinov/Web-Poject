@@ -9,6 +9,10 @@ table {
 
 }
 
+.title {
+    margin: 2%;
+}
+
 tr th{
     padding: 10px;
     padding-left: 30px;
@@ -60,6 +64,10 @@ footer {
     justify-content: center;
     height: 50px;
     margin-top: 10%;
+    position:fixed;
+    bottom: 0;
+    right: 0;
+    left:0;
 }
 
 .grid {
