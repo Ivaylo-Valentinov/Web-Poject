@@ -14,9 +14,15 @@ main {
     margin-bottom: 10%;
 }
 
+
 .title {
     font-family: Merienda;
     margin: 2%;
+    transition: all 2s;
+}
+
+.title:hover {
+    transform: rotate3d(1,0,0,360deg);
 }
 
 tr th{
@@ -48,6 +54,16 @@ button {
     height: 30px;
 }
 
+button:hover {
+    background-color: #faebd1;
+    color: #F6A106;
+    cursor: pointer;
+}
+
+#addBook {
+    width: 10%;
+}
+
 .cancel {
     font-weight: bold;
     width: 8%;
@@ -56,6 +72,7 @@ button {
     color: #faebd1;
     border: none;
     margin-left: 20px;
+    margin-right: 0px;
 }
 
 .cancel:hover {
