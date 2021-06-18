@@ -18,6 +18,7 @@ main {
 .title {
     font-family: Merienda;
     margin: 2%;
+    margin-left: 4%;
     transition: all 2s;
 }
 
@@ -112,4 +113,12 @@ footer {
 
 p.centered {
     text-align: center;
+}
+
+figure{
+    display: flex;
+    justify-items: center;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
 }
