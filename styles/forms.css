@@ -19,6 +19,14 @@ body {
     font-family: sansita;
 }
 
+.growTitle {
+    transition: all 1s;
+}
+
+.growTitle:hover {
+    transform: scale(1.5);
+}
+
 main {
     display: flex;
     flex-direction: column;
