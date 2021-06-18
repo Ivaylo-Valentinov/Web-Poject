@@ -6,10 +6,15 @@
         <link rel="stylesheet" href="styles/navbar.css"/>
         <link rel="stylesheet" href="styles/search.css"/>
         <link rel="stylesheet" href="styles/files.css"/>
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Merienda:wght@700&display=swap" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Merienda:wght@700&family=Sansita&display=swap" rel="stylesheet">
         <script defer src="scripts/sendRequestUtility.js"></script>
         <script defer src="scripts/books.js"></script>
         <script defer src="scripts/logout.js"></script>
         <script src="scripts/privateRoute.js"></script>
+        <script defer src="scripts/homepage.js"></script>
     </head>
     <body>
         <header>
@@ -29,6 +34,7 @@
             <header class="searchInputs">
                 <input id="searchBar" placeholder="Search">
                 <input id="searchBtn" value="Search" type="submit">
+                <button id="addBook"> Add new book </button>
             </header>
             <section>
                 <table id="books">

@@ -11,10 +11,20 @@ body {
     color: #546747;
     margin-top: 150px;
     text-align: center;
+    font-family: merienda;
 }
 
 .formTitle {
     color: #2B331F;
+    font-family: sansita;
+}
+
+.growTitle {
+    transition: all 1s;
+}
+
+.growTitle:hover {
+    transform: scale(1.5);
 }
 
 main {
@@ -39,6 +49,11 @@ input, select {
 
 select {
     width: 66%;
+}
+
+p {
+    font-family: calibri;
+    font-weight: bold;
 }
 
 .button {
