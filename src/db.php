@@ -71,10 +71,10 @@ class Database {
     $sql = "UPDATE books SET checkout_amount = checkout_amount+1 WHERE id =:bookId";
     $this->incrementCheckoutCount = $this->connection->prepare($sql);
     
-    $sql = "UPDATE users SET numberOfCheckedBooks = numberOfCheckedBooks+1 WHERE id =:userId";
+    $sql = "UPDATE users SET checked_count = checked_count+1 WHERE id =:userId";
     $this->incrementCheckedOutBooksCount = $this->connection->prepare($sql);
 
-    $sql = "UPDATE users SET numberOfCheckedBooks = numberOfCheckedBooks-1 WHERE id =:userId";
+    $sql = "UPDATE users SET checked_count = checked_count-1 WHERE id =:userId";
     $this->decrementCheckedOutBooksCount = $this->connection->prepare($sql);
     
     $sql = "INSERT INTO taken_books(user_id, book_id, expiration_date) VALUES (:user_id, :bookid, :expDate)";
@@ -237,8 +237,8 @@ class Database {
 
           $this->checkoutBook->execute($data);
           $this->incrementCheckoutCount->execute(["bookId" => $data["bookid"]]);
-          $this->incrementCheckedOutBooksCount->execute(["user_id"=>$data["userid"]]]);
-          $this->decrementCheckedOutBooksCount->execute(["user_id"=>$data["userid"]]]);
+          $this->incrementCheckedOutBooksCount->execute(["userId"=>$data["user_id"]]);
+          
 
           $this->connection->commit();
 
@@ -261,10 +261,16 @@ class Database {
 
   public function returnBook($data) {
     try {
-        $this->returnBook->execute($data);
+        $this->connection->beginTransaction();
+
+        $this->returnBook->execute(["bookid"=>$data["bookid"]]);
+        $this->decrementCheckedOutBooksCount->execute(["userId"=>$data["user_id"]]);
+
+        $this->connection->commit();
 
         return ["success" => true, "data" => $this->returnBook];
       } catch(PDOException $e) {
+        $this->connection->rollBack();
         return ["success" => false, "error" => "Connection failed: " . $e->getMessage()];
     }
 }
