@@ -39,12 +39,12 @@ h2 {
 }
 
 button {
-    margin-right: 20px;
+    margin: 20px;
     background-color: #F6A106;
     color: #faebd1;
     border: none;
     font-weight: bold;
-    width: auto;
+    width: 25%;
     height: 30px;
 }
 
