@@ -11,10 +11,12 @@ body {
     color: #546747;
     margin-top: 150px;
     text-align: center;
+    font-family: merienda;
 }
 
 .formTitle {
     color: #2B331F;
+    font-family: sansita;
 }
 
 main {
@@ -39,6 +41,11 @@ input, select {
 
 select {
     width: 66%;
+}
+
+p {
+    font-family: calibri;
+    font-weight: bold;
 }
 
 .button {

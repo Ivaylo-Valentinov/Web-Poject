@@ -6,7 +6,7 @@ main{
 
 .flip {
     color:#2B331F;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-family: sansita;
     transition: all 3s;
     transform: translateX(40%) rotate3d(0, 1 ,0 , 360deg);
 }
@@ -15,6 +15,7 @@ main{
     color: #546747;
     font-size: 24px;
     text-align: left;
+    font-family: sansita;
 }
 
 .lastReadTitle{
