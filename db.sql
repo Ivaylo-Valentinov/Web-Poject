@@ -7,6 +7,7 @@ CREATE TABLE `bookaloo`.`users` (
   `username` VARCHAR(255) NOT NULL , 
   `password` VARCHAR(255) NOT NULL , 
   `email` VARCHAR(255) NOT NULL , 
+  `checked_count` INT NOT NULL DEFAULT 0 ,
   PRIMARY KEY (`id`), 
   UNIQUE `username_unique` (`username`)
 ) ENGINE = InnoDB;
@@ -52,7 +53,7 @@ INSERT INTO bookaloo.books(title, author, description, count, type, link) VALUES
 INSERT INTO bookaloo.books(title, author, description, count, type, link) VALUES("Ref 1", "Ref Author 1", "Ref Description 1", 10, "ref", "placeholder_link");
 INSERT INTO bookaloo.books(title, author, description, count, type, link) VALUES("Ref 2", "Ref Author 2", "Ref Description 2", 10, "ref", "placeholder_link");
 INSERT INTO bookaloo.books(title, author, description, count, type, link) VALUES("Ref 3", "Ref Author 3", "Ref Description 3", 10, "ref", "placeholder_link");
-INSERT INTO bookaloo.taken_books(user_id, book_id, expiration_date, checkout_date) VALUES(1, 1, '2021-06-06', '2021-06-1');
-INSERT INTO bookaloo.taken_books(user_id, book_id, expiration_date, checkout_date) VALUES(1, 2, '2021-06-06', '2021-06-1');
-INSERT INTO bookaloo.taken_books(user_id, book_id, expiration_date, checkout_date) VALUES(1, 3, '2021-06-06', '2021-06-1');
-INSERT INTO bookaloo.taken_books(user_id, book_id, expiration_date, checkout_date) VALUES(1, 4, '2021-06-06', '2021-06-1');
+-- INSERT INTO bookaloo.taken_books(user_id, book_id, expiration_date, checkout_date) VALUES(1, 1, '2021-06-06', '2021-06-1');
+-- INSERT INTO bookaloo.taken_books(user_id, book_id, expiration_date, checkout_date) VALUES(1, 2, '2021-06-06', '2021-06-1');
+-- INSERT INTO bookaloo.taken_books(user_id, book_id, expiration_date, checkout_date) VALUES(1, 3, '2021-06-06', '2021-06-1');
+-- INSERT INTO bookaloo.taken_books(user_id, book_id, expiration_date, checkout_date) VALUES(1, 4, '2021-06-06', '2021-06-1');

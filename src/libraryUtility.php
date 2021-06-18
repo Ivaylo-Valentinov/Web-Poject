@@ -33,7 +33,7 @@ if(isset($_POST)){
                 }
             }
             else{
-                $query = $db->returnBook(["bookid" => $data["bookid"]]);
+                $query = $db->returnBook(["user_id" => $_SESSION['user_id'], "bookid" => $data["bookid"]]);
                 print_r($data);
             }
 
