@@ -26,3 +26,19 @@ function sendRequest(url, options, successCallback, errorCallback) {
     request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     request.send(options.data);
 }
+
+function sendMultipartDataRequest(url, options, successCallback, errorCallback) {
+    var request = new XMLHttpRequest();
+    request.open(options.method, url, true);
+    request.send(options.formdata);
+    request.addEventListener('load', function() {
+        console.log(request.responseText);
+        var response = JSON.parse(request.responseText);
+        
+        if (request.status === 200) {
+            successCallback(response);
+        } else {
+            errorCallback(response);
+        }
+    });
+}

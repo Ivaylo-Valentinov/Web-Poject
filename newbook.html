@@ -9,6 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Merienda:wght@700&display=swap" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Merienda:wght@700&family=Sansita&display=swap" rel="stylesheet">
+    <script defer src="scripts/sendRequestUtility.js"></script>
     <script defer src="scripts/newbook.js"></script>
     <script src="scripts/privateRoute.js"></script>
 </head>
@@ -31,8 +32,15 @@
                 <option value="Ref">Referat</option>
             </select>
             <input id="file" placeholder="Upload PDF" type="file" required>
-            <input id="add-book-btn" class="button" type="submit" value="Add Book">
+            <input id="add-book-btn" class="button" type="submit" value="Add">
             <label id="errors"></label>
+        </form>
+        <header>
+            <h2 class="formTitle">Add multiple books</h2>
+        </header>
+        <form>
+            <input id="multiple-files" webkitdirectory directory multiple type="file">
+            <input id="multiple-books-btn" class="button" type="submit" value="Add">
         </form>
     </main>
 </body>

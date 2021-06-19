@@ -41,6 +41,18 @@ class Book {
     }
   }
 
+  public function saveBookPDF($file_tmp_name, $file_name, $file_type) {
+    if($file_name && $file_type === 'application/pdf'){
+        if(!move_uploaded_file($file_tmp_name,"../pdfs/".$file_name)) {
+            return ["success" => false, "error" => "Unsuccessful upload"];
+        }
+    } else {
+        return ["success" => false, "error" =>  "Cannot save file"];
+    }
+
+    return ["success" => true];
+  }
+
   public function insertBook($title, $author, $description, $count, $link) {
     $validate = $this->validateString($title);
     if (!$validate["success"]) {
