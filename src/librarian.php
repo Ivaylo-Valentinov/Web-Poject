@@ -66,7 +66,7 @@
 
         public function appendIsTakenBook($userId, $content) {
             for($i = 0; $i <count($content); $i++) {
-                $content[$i]['isTaken'] = $this->isTakenBool($userId,$content[$i]); 
+                $content[$i]['isTaken'] = $this->isTakenBool($userId,$content[$i]['id']); 
             }
 
             return $content;

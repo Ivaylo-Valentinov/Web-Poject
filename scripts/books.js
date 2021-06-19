@@ -45,10 +45,14 @@ function appendTable(bookInfo) {
 
     if(bookInfo.isTaken) {
         checkOutButton.disabled = true;
+        checkOutButton.style.background = "lightgrey";
+        checkOutButton.style.color = "black";
         viewButton.disabled = false;
     } else {
         checkOutButton.disabled = false;
         viewButton.disabled = true;
+        viewButton.style.background = "lightgrey";
+        viewButton.style.color = "black";
     }
 
     var actionsTd = document.createElement('td');
