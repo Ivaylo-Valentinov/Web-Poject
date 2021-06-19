@@ -25,11 +25,18 @@ if(isset($_POST)){
 
             if($opType == "check"){
                 $isTaken =$lib->isTaken($_SESSION['user_id'], $data["bookid"]);
-                if(!$isTaken) {
-                    $query = $db->checkoutBook(["user_id" => $_SESSION['user_id'], "bookid" => $data["bookid"], "expDate" => date('Y-m-d', strtotime("+20 days"))]);
+                $canTakeAnotherBook = $lib->canTakeBook($_SESSION['user_id']);
+                if(!$isTaken ) {
+                    if($canTakeAnotherBook){
+                        $query = $db->checkoutBook(["user_id" => $_SESSION['user_id'], "bookid" => $data["bookid"], "expDate" => date('Y-m-d', strtotime("+20 days"))]);
+                    }
+                    else{
+                        $query = ["success"=>false, "error"=>"Can't take more books!"];
+                    }
+                    
                 }
                 else{
-                    $query = ["success"=>false, "error"=>"Book is taken!"];
+                    $query = ["success"=>false, "error"=>"Book already taken!"];
                 }
             }
             else{
