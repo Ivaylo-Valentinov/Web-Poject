@@ -165,15 +165,6 @@ class Database {
     }
   }
 
-  public function selectContentQuery($data) {
-    try{
-      $this->selectContent->execute($data);
-
-      return ["success" => true, "data" => $this->selectContent];
-    }catch(PDOException $e) {
-      return ["success" => false, "error" => $e->getMessage()];
-    }
-  }
   
    /**
          * We use this method to execute queries for inserting user session token

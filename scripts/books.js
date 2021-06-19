@@ -43,6 +43,14 @@ function appendTable(bookInfo) {
         checkoutBook(bookInfo.id);
     });
 
+    if(bookInfo.isTaken) {
+        checkOutButton.disabled = true;
+        viewButton.disabled = false;
+    } else {
+        checkOutButton.disabled = false;
+        viewButton.disabled = true;
+    }
+
     var actionsTd = document.createElement('td');
     actionsTd.append(viewButton, checkOutButton);
 
