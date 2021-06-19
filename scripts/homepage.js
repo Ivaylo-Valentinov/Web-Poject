@@ -3,16 +3,12 @@
 
     requestTakenBooks();
 
-    var addBtn = document.getElementById('addBook');
-    addBtn.addEventListener('click', directToAddBook);
 })();
 
-function directToAddBook(){
-    window.location = 'newbook.html';
-}
 
 function requestTakenBooks() {
     console.log("Requesting taken books");
+
     var user = {
         user_id: 1,
     };
@@ -20,6 +16,7 @@ function requestTakenBooks() {
     console.log("After request");
 
 }
+
 
 /**
  * Handle the received response from the server

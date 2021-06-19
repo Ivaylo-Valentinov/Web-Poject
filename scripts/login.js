@@ -1,19 +1,10 @@
 (function () {
-    /**
-     * Get the login button
-     */
-    var login = document.getElementById('login');
 
-    /**
-     * Listen for click event on the login button
-     */
+    var login = document.getElementById('login');
     login.addEventListener('click', sendForm);
 })();
 
 function sendForm(event) {
-    /**
-     * Prevent the default behavior of the clicking the form submit button
-     */
     event.preventDefault();
 
     /**
@@ -22,18 +13,11 @@ function sendForm(event) {
     var username = document.getElementById('username').value;
     var password = document.getElementById('password').value;
 
-    /**
-     * Create an object with the user's data
-     */
     var user = {
         username,
         password,
     };
 
-   
-    /**
-     * Send POST request with user's data to api.php/login
-     */
     sendRequest('src/login.php', { method: 'POST', data: `data=${JSON.stringify(user)}` }, load, console.log);
 }
 

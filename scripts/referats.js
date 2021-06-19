@@ -3,7 +3,14 @@
     var searchBtn = document.getElementById('searchBtn');
     searchBtn.addEventListener('click', sendBookRequest);
 
+    var addBtn = document.getElementById('addBook');
+    addBtn.addEventListener('click', directToAddBook);
+
 })();
+
+function directToAddBook(){
+    window.location = 'newbook.html';
+}
 
 function initalLoad() {
     sendRequest('src/referats.php', {method: 'GET'}, loadBooks, console.log);
@@ -22,7 +29,7 @@ function appendTable(bookInfo) {
     authorTd.innerHTML = bookInfo.author;
 
     var viewButton = document.createElement('button');
-    viewButton.innerHTML = 'View';
+    viewButton.innerHTML = 'Read';
     viewButton.addEventListener('click', function() {
         openBookPage(bookInfo.id);
     });

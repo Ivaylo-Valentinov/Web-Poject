@@ -3,7 +3,14 @@
     var searchBtn = document.getElementById('searchBtn');
     searchBtn.addEventListener('click', sendBookRequest);
 
+    var addBtn = document.getElementById('addBook');
+    addBtn.addEventListener('click', directToAddBook);
+
 })();
+
+function directToAddBook(){
+    window.location = 'newbook.html';
+}
 
 function initalLoad() {
     sendRequest('src/books.php', {method: 'GET'}, loadBooks, console.log);
@@ -25,7 +32,7 @@ function appendTable(bookInfo) {
     countTd.innerHTML = bookInfo.count;
 
     var viewButton = document.createElement('button');
-    viewButton.innerHTML = 'View';
+    viewButton.innerHTML = 'Read';
     viewButton.addEventListener('click', function() {
         openBookPage(bookInfo.id);
     });
@@ -112,6 +119,7 @@ function loadSpecificBooks(booksData) {
 }
 
 function checkoutBook(bookID) {
+
      /**
         * Create an object with the user's data
         */

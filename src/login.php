@@ -24,20 +24,25 @@
 
         if($data['username'] && $data['password']) {
             $user = new User($data['username'], $data['password']);
-            $isValid = $user->isValid();
-
-            if($isValid['success']) {
-                $_SESSION['username'] = $user->getUsername();
-                $_SESSION['email'] = $user->getEmail();
-                $_SESSION['userId'] = $user->getUserId();
-
-                $tokenUtility = new TokenUtility();
-                $token = bin2hex(random_bytes(8));
-                $expires = time() + 30 * 24 * 60 * 60;
-                setcookie('token', $token, $expires, '/');
-                $tokenUtility->createToken($token, $_SESSION['userId'], $expires);
+            $exists = $user->userExists();
+            if(!$exists) {
+                $errors[] = "Invalid username or password.";
             } else {
-                $errors[] = $isValid['error'];
+                $isValid = $user->isValid();
+
+                if($isValid['success']) {
+                    $_SESSION['username'] = $user->getUsername();
+                    $_SESSION['email'] = $user->getEmail();
+                    $_SESSION['userId'] = $user->getUserId();
+
+                    $tokenUtility = new TokenUtility();
+                    $token = bin2hex(random_bytes(8));
+                    $expires = time() + 30 * 24 * 60 * 60;
+                    setcookie('token', $token, $expires, '/');
+                    $tokenUtility->createToken($token, $_SESSION['userId'], $expires);
+                } else {
+                    $errors[] = $isValid['error'];
+                }
             }
         }
     } else {
@@ -47,7 +52,7 @@
 
     if($errors) {
         $response = ['success' => false, 'data' => $errors];
-        http_response_code(404);
+       // http_response_code(404);
     } else {
         $response = ['success' => true];
     }
