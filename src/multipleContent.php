@@ -8,8 +8,6 @@
   $referat = new Referat();
   $book = new Book();
 
-  $NUM_OF_COLUMNS = 6;
-
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_FILES['files'])) {
 
     $csv_file = null;
@@ -28,9 +26,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_FILES['files'])) {
         }
     }
 
-    // Check if csv_file exists...
+    if (is_null($csv_file)) {
+        $errors[] = "Must upload csv file with metadata for the books.";
+    }
 
-    if (($handle = fopen($csv_file, "r")) !== FALSE) {
+    if (!$errors && (($handle = fopen($csv_file, "r")) !== FALSE)) {
         while (($data = fgetcsv($handle, 0, ",")) !== FALSE) {
             $title = $data[0];
             $author = $data[1];
@@ -39,7 +39,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_FILES['files'])) {
             $type = $data[4];
             $file_name = $data[5];
 
-            // Check if file exists... 
+            if (!isset($files[$file_name])) {
+                continue;
+            }
+
             $file_tmp_name = $files[$file_name]["tmp_name"];
             $file_type = $files[$file_name]["type"];
 
@@ -69,10 +72,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_FILES['files'])) {
         }
         fclose($handle);
     }
-
-
-    //  print_r($files);
-    //  echo $csv_file;
 } else  {
     $errors[] = "Not valid method";
 }
