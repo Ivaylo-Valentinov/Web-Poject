@@ -53,7 +53,7 @@
 
 
 
-        public function isTakenSecond($user_id, $book_id) {
+        public function isTakenBool($user_id, $book_id) {
             $query = $this->db->getTakenBooks(["cuid" => $user_id]);
             if (!$query["success"]) {
                 return false;
