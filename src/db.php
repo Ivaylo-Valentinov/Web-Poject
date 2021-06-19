@@ -275,7 +275,7 @@ class Database {
     }
 }
 
-      /**
+  /**
   * Close the connection to the DB
   */
   function __destruct() {
