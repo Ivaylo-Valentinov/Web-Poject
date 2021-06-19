@@ -1,5 +1,5 @@
 (function() {
-    initalLoad();
+    initialLoad();
     var searchBtn = document.getElementById('searchBtn');
     searchBtn.addEventListener('click', sendBookRequest);
 
@@ -12,7 +12,7 @@ function directToAddBook(){
     window.location = 'newbook.html';
 }
 
-function initalLoad() {
+function initialLoad() {
     sendRequest('src/books.php', {method: 'GET'}, loadBooks, console.log);
 }
 
@@ -120,19 +120,11 @@ function loadSpecificBooks(booksData) {
 
 function checkoutBook(bookID) {
 
-     /**
-        * Create an object with the user's data
-        */
-
        var user = {
            bookid: bookID,
            opType: "check"
        };
    
-   
-       /**
-        * Send POST request with user's data to api.php/login
-        */
-       sendRequest('src/libraryUtility.php', { method: 'POST', data: `data=${JSON.stringify(user)}` }, initalLoad, console.log);
+       sendRequest('src/libraryUtility.php', { method: 'POST', data: `data=${JSON.stringify(user)}` }, initialLoad, console.log);
    
 }

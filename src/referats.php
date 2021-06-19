@@ -1,20 +1,35 @@
 <?php
   require_once "referat.php";
+  require_once "librarian.php";
+  require_once "tokenUtility.php";
   require_once "requestUtility.php";
 
   $errors = [];
   $response = [];
   $referat = new Referat();
+  $librarian = new Librarian();
 
   if ($_SERVER["REQUEST_METHOD"] === "GET") {
 
-    $allReferats = $referat->getAllReferats();
+    if ($_COOKIE['token']) {
+      $tokenUtility = new TokenUtility();
+      $isValid = $tokenUtility->checkToken($_COOKIE['token']);
 
-    if ($allReferats["success"]) {
-      $response = $allReferats["data"];
-    } else {
-      $errors[] = $allReferats["error"];
-    }
+      if ($isValid["success"]) {
+        $allReferats = $referat->getAllReferats();
+
+        if ($allReferats["success"]) {
+          $response = $librarian->appendIsTakenBook($_SESSION['user_id'], $allReferats["data"]);
+        } else {
+          $errors[] = $allReferats["error"];
+        }
+      } 
+      else {
+          $errors[] = "Not valid cookie";
+      }
+  } else {
+      $errors[] = "noCookie";
+  }
 
   } else if ($_SERVER["REQUEST_METHOD"] === "POST") {
 

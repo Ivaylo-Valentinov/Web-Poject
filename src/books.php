@@ -1,20 +1,37 @@
 <?php
   require_once "book.php";
+  require_once "librarian.php";
   require_once "requestUtility.php";
+  require_once "tokenutility.php";
 
   $errors = [];
   $response = [];
   $book = new Book();
+  $librarian = new Librarian();
+
 
   if ($_SERVER["REQUEST_METHOD"] === "GET") {
 
-    $allBooks = $book->getAllBooks();
+    
+    if ($_COOKIE['token']) {
+      $tokenUtility = new TokenUtility();
+      $isValid = $tokenUtility->checkToken($_COOKIE['token']);
 
-    if ($allBooks["success"]) {
-      $response = $allBooks["data"];
-    } else {
-      $errors[] = $allBooks["error"];
-    }
+      if ($isValid["success"]) {
+        $allBooks = $book->getAllBooks();
+
+        if ($allBooks["success"]) {
+          $response = $librarian->appendIsTakenBook( $_SESSION['user_id'], $allBooks["data"]);
+        } else {
+          $errors[] = $allBooks["error"];
+        }
+      } 
+      else {
+          $errors[] = "Not valid cookie";
+      }
+  } else {
+      $errors[] = "noCookie";
+  }
 
   } else if ($_SERVER["REQUEST_METHOD"] === "POST") {
 

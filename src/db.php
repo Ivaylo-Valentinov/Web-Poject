@@ -164,6 +164,16 @@ class Database {
       return ["success" => false, "error" => $e->getMessage()];
     }
   }
+
+  public function selectContentQuery($data) {
+    try{
+      $this->selectContent->execute($data);
+
+      return ["success" => true, "data" => $this->selectContent];
+    }catch(PDOException $e) {
+      return ["success" => false, "error" => $e->getMessage()];
+    }
+  }
   
    /**
          * We use this method to execute queries for inserting user session token
@@ -275,7 +285,7 @@ class Database {
     }
 }
 
-  /**
+      /**
   * Close the connection to the DB
   */
   function __destruct() {
