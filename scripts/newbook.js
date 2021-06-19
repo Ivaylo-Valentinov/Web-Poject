@@ -1,10 +1,12 @@
 (function() {
-    var submitButton = document.getElementById('add-book-btn');
+    var submitSingle = document.getElementById('add-book-btn');
+    var submitMultiple = document.getElementById('multiple-books-btn');
   
-    submitButton.addEventListener('click', sendForm);
+    submitSingle.addEventListener('click', sendSingleForm);
+    submitMultiple.addEventListener('click', sendMultipleForm);
 })();
   
-function sendForm(event) {
+function sendSingleForm(event) {
      event.preventDefault();
 
     var title = document.getElementById('title').value;
@@ -28,24 +30,32 @@ function sendForm(event) {
     formdata.append('count', count);
     formdata.append('type', type);
 
-    formdata.append("file", file, file.name);
+    formdata.append("file", file);
 
-    var request = new XMLHttpRequest();
-    request.open('POST', url, true);
-    request.send(formdata);
-    request.addEventListener('load', function() {
-        var response = JSON.parse(request.responseText);
-        
-        if (request.status === 200) {
-            onAddedBook();
-        } else {
-            onError(response);
-        }
-    });
+    sendMultipartDataRequest(url, { method: 'POST', formdata: formdata }, onSuccess, onError);
 }
-  
 
-function onAddedBook() {
+function sendMultipleForm(event) {
+    event.preventDefault();
+
+    var files = document.getElementById('multiple-files').files;
+
+    if (!files) {
+        errors.innerHTML = "You should upload content!";
+        return;
+    }
+
+    var formdata = new FormData();
+
+    console.log(files);
+    for (var i = 0; i < files.length; ++i) {
+        formdata.append("files[]", files[i]);
+    }
+
+    sendMultipartDataRequest('src/multipleContent.php', { method: 'POST', formdata: formdata }, onSuccess, onError);
+}
+
+function onSuccess() {
     alert("Success");
     window.location = 'index.html';
 }

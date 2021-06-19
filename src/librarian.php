@@ -18,7 +18,7 @@
         
         public function isTaken ($user_id, $book_id) {
             $query = $this->db->isBookTaken(["bookid" => $book_id, "userid"=>$user_id]);
-
+        
             if($query["success"]){
                 $result = $query["data"]->fetch(PDO::FETCH_ASSOC);
                 if($result){
@@ -33,7 +33,27 @@
             }
         }
 
-        public function isTakenSecond($user_id, $book_id) {
+        public function canTakeBook ($user_id) {
+            $query = $this->db->selectUserByIdQuery(["id"=>$user_id]);
+            
+            if($query["success"]){
+                $result = $query["data"]->fetch(PDO::FETCH_ASSOC);
+                $checkedBookCount = $result["checked_count"];
+                if($checkedBookCount < 3){
+                    return true;
+                }
+                else{
+                        return false;
+                }
+            }
+            else{
+                    return $query;
+            }
+        }
+
+
+
+        public function isTakenBool($user_id, $book_id) {
             $query = $this->db->getTakenBooks(["cuid" => $user_id]);
             if (!$query["success"]) {
                 return false;

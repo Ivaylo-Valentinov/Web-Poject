@@ -25,16 +25,15 @@
     $type = isset($_POST["type"]) ? RequestUtility::testInput($_POST["type"]) : "";
 
     $file_name = uniqid().$_FILES['file']['name'];
-    $file_type = $_FILES['file']['type'];      
-    $file_size = $_FILES['file']['size'];
+    $file_type = $_FILES['file']['type'];
     $file_tmp_name  = $_FILES['file']['tmp_name'];
 
     $link = "pdfs/".$file_name;
 
-    if($file_name){
-        if(!move_uploaded_file($file_tmp_name,"../pdfs/".$file_name)) {
-            $errors[] = "Unsuccessful upload";
-        }
+    $uploadResult = $referat->saveReferatPDF($file_tmp_name, $file_name, $file_type);
+
+    if (!$uploadResult["success"]) {
+        $errors[] = $uploadResult["error"];
     }
 
     if (!$errors) {
