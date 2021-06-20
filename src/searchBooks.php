@@ -1,30 +1,45 @@
 <?php
   require_once "book.php";
+  require_once "librarian.php";
   require_once "requestUtility.php";
-
- // header("Content-Type: application/json");
+  require_once "tolkenUtility.php";
 
   $errors = [];
   $response = [];
   $book = new Book();
+  $librarian = new Librarian();
 
-  if ($_SERVER["REQUEST_METHOD"] === "GET") {
-   //TO DO
+  if (isset($_POST)) {
 
-  } else if (isset($_POST)) {
-    $data = json_decode($_POST["data"], true);
+    if ($_COOKIE['token']) {
+      $tokenUtility = new TokenUtility();
+      $isValid = $tokenUtility->checkToken($_COOKIE['token']);
 
-    $search = isset($data['searchInfo']) ? RequestUtility::testInput($data['searchInfo']) : null;
-    $result = $book->getSpecificBook($search);
-    
-    if ($result["success"]) {
-      $response = $result["data"];
-    } else {
-      $errors[] = $result["error"];
-    }
-    //TO DO
+      if ($isValid["success"]) {
+
+        $data = json_decode($_POST["data"], true);
+
+        $search = isset($data['searchInfo']) ? RequestUtility::testInput($data['searchInfo']) : null;
+        $result = $book->getSpecificBook($search);
+        
+        if ($result["success"]) {
+          $response = $librarian->appendIsTakenBook( $_SESSION['user_id'], $result["data"]);
+        } else {
+          $errors[] = $result["error"];
+        }
+
+      } 
+      else {
+          $errors[] = "Not valid cookie";
+      }
+  } else {
+      $errors[] = "noCookie";
+  }
+
+
+ 
   } else  {
-    $errors[] = "Невалидна заявка.";
+    $errors[] = "Not valid method";
   }
 
   RequestUtility::sendResponse($response, $errors);
