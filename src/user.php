@@ -63,10 +63,10 @@
 
                         return ["success" => true];
                     } else {
-                        return ["success" => false, "error" => "Invalid password"];
+                        return ["success" => false, "error" => "Invalid username or password."];
                     }
                 } else {
-                    return ["success" => false, "error" => "Invalid username"];
+                    return ["success" => false, "error" => "Invalid username or password."];
                 }
             } else {
                 return $query;
