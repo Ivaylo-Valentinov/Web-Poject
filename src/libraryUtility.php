@@ -41,7 +41,6 @@ if(isset($_POST)){
             }
             else{
                 $query = $db->returnBook(["user_id" => $_SESSION['user_id'], "bookid" => $data["bookid"]]);
-                print_r($data);
             }
 
             if ($query["success"]) {

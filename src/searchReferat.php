@@ -23,7 +23,7 @@
       $result = $referat->getSpecificReferat($search);
       
       if ($result["success"]) {
-        $response = $librarian( $_SESSION['user_id'], $result["data"]);
+        $response = $librarian->appendIsTakenBook( $_SESSION['user_id'], $result["data"]);
       } else {
         $errors[] = $result["error"];
       }
