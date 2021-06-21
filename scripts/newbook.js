@@ -47,7 +47,6 @@ function sendMultipleForm(event) {
 
     var formdata = new FormData();
 
-    console.log(files);
     for (var i = 0; i < files.length; ++i) {
         formdata.append("files[]", files[i]);
     }
