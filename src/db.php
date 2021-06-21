@@ -164,6 +164,7 @@ class Database {
       return ["success" => false, "error" => $e->getMessage()];
     }
   }
+
   
       public function insertTokenQuery($data) {
         try{

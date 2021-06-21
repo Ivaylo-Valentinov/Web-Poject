@@ -15,7 +15,6 @@ function sendForm(event) {
         password,
     };
 
-
     sendRequest('src/login.php', { method: 'POST', data: `data=${JSON.stringify(user)}` }, load, console.log);
 }
 

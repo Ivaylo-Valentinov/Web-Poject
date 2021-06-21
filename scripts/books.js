@@ -1,11 +1,18 @@
 (function() {
-    initalLoad();
+    initialLoad();
     var searchBtn = document.getElementById('searchBtn');
     searchBtn.addEventListener('click', sendBookRequest);
 
+    var addBtn = document.getElementById('addBook');
+    addBtn.addEventListener('click', directToAddBook);
+
 })();
 
-function initalLoad() {
+function directToAddBook(){
+    window.location = 'newbook.html';
+}
+
+function initialLoad() {
     sendRequest('src/books.php', {method: 'GET'}, loadBooks, console.log);
 }
 
@@ -25,7 +32,7 @@ function appendTable(bookInfo) {
     countTd.innerHTML = bookInfo.count;
 
     var viewButton = document.createElement('button');
-    viewButton.innerHTML = 'View';
+    viewButton.innerHTML = 'Read';
     viewButton.addEventListener('click', function() {
         openBookPage(bookInfo.id);
     });
@@ -35,6 +42,18 @@ function appendTable(bookInfo) {
     checkOutButton.addEventListener("click", function () {
         checkoutBook(bookInfo.id);
     });
+
+    if(bookInfo.isTaken) {
+        checkOutButton.disabled = true;
+        checkOutButton.style.background = "lightgrey";
+        checkOutButton.style.color = "black";
+        viewButton.disabled = false;
+    } else {
+        checkOutButton.disabled = false;
+        viewButton.disabled = true;
+        viewButton.style.background = "lightgrey";
+        viewButton.style.color = "black";
+    }
 
     var actionsTd = document.createElement('td');
     actionsTd.append(viewButton, checkOutButton);
@@ -112,19 +131,12 @@ function loadSpecificBooks(booksData) {
 }
 
 function checkoutBook(bookID) {
-     /**
-        * Create an object with the user's data
-        */
 
        var user = {
            bookid: bookID,
            opType: "check"
        };
    
-   
-       /**
-        * Send POST request with user's data to api.php/login
-        */
-       sendRequest('src/libraryUtility.php', { method: 'POST', data: `data=${JSON.stringify(user)}` }, initalLoad, console.log);
+       sendRequest('src/libraryUtility.php', { method: 'POST', data: `data=${JSON.stringify(user)}` }, initialLoad, console.log);
    
 }

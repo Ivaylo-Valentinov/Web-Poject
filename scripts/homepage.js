@@ -2,9 +2,6 @@
     requestTakenBooks();
 })();
 
-function directToAddBook(){
-    window.location = 'newbook.html';
-}
 
 function requestTakenBooks() {
     var user = {
