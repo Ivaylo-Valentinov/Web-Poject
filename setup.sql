@@ -21,6 +21,7 @@ CREATE TABLE `bookaloo`.`books` (
   `type` VARCHAR(255) NOT NULL ,
   `link` VARCHAR(255) NOT NULL ,
   `checkout_amount` INT NOT NULL DEFAULT 0 ,
+  `total_checkout_amount` INT NOT NULL DEFAULT 0 ,
   `image` VARCHAR(255) ,
   PRIMARY KEY (`id`)
 ) ENGINE = InnoDB;
@@ -55,7 +56,3 @@ INSERT INTO bookaloo.books(title, author, description, count, type, link) VALUES
 INSERT INTO bookaloo.books(title, author, description, count, type, link) VALUES("Ref 1", "Ref Author 1", "Ref Description 1", 1, "ref", "placeholder_link");
 INSERT INTO bookaloo.books(title, author, description, count, type, link) VALUES("Ref 2", "Ref Author 2", "Ref Description 2", 1, "ref", "placeholder_link");
 INSERT INTO bookaloo.books(title, author, description, count, type, link) VALUES("Ref 3", "Ref Author 3", "Ref Description 3", 1, "ref", "placeholder_link");
-INSERT INTO bookaloo.taken_books(user_id, book_id, expiration_date, checkout_date) VALUES(1, 1, '2021-06-06', '2021-06-1');
--- INSERT INTO bookaloo.taken_books(user_id, book_id, expiration_date, checkout_date) VALUES(1, 2, '2021-06-06', '2021-06-1');
--- INSERT INTO bookaloo.taken_books(user_id, book_id, expiration_date, checkout_date) VALUES(1, 3, '2021-06-06', '2021-06-1');
--- INSERT INTO bookaloo.taken_books(user_id, book_id, expiration_date, checkout_date) VALUES(1, 4, '2021-06-06', '2021-06-1');

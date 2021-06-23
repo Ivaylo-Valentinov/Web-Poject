@@ -31,10 +31,10 @@
   }
 
   function checkMostReads($book1, $book2) {
-    if ($book1["checkout_amount"] == $book2["checkout_amount"]) {
+    if ($book1["total_checkout_amount"] == $book2["total_checkout_amount"]) {
         return 0;
     }
-    return ($book1["checkout_amount"] > $book2["checkout_amount"]) ? -1 : 1;
+    return ($book1["total_checkout_amount"] > $book2["total_checkout_amount"]) ? -1 : 1;
   }
 
   RequestUtility::sendResponse($response, $errors);

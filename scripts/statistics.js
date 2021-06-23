@@ -24,7 +24,9 @@ function loadRefs(refs) {
 function appendToFlex(info, container) {
     var element = document.createElement('p');
     element.setAttribute('class', 'centered');
-    element.innerHTML = info.title +"- "+ info.checkout_amount + " checkouts";
+    element.innerHTML = info.title;
+
+    element.innerHTML = info.title +"- "+ info.total_checkout_amount + " checkouts";
     container.append(element);
     
 }
