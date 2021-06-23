@@ -16,9 +16,15 @@ function sendSingleForm(event) {
     var type = document.getElementById('type').value;
     var url = type === 'Book' ? 'src/books.php' : 'src/referats.php';
     var file = document.getElementById('file').files[0];
+    var image = document.getElementById('image').files[0];
 
     if (!file) {
         errors.innerHTML = "You should upload a book!";
+        return;
+    }
+
+    if (!image) {
+        errors.innerHTML = "You should upload an image!";
         return;
     }
 
@@ -31,6 +37,7 @@ function sendSingleForm(event) {
     formdata.append('type', type);
 
     formdata.append("file", file);
+    formdata.append("image", image);
 
     sendMultipartDataRequest(url, { method: 'POST', formdata: formdata }, onSuccess, onError);
 }

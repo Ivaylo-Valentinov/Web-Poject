@@ -22,6 +22,14 @@ function appendTable(bookInfo) {
     var tr = document.createElement('tr');
     tr.setAttribute('class', 'book');
 
+    var imageTd = document.createElement('td');
+    var image = document.createElement('img');
+    if (!bookInfo.image) {
+        bookInfo.image = 'img/placeholder.png';
+    }
+    image.setAttribute('src', bookInfo.image);
+    imageTd.append(image);
+
     var titleTd = document.createElement('td');
     titleTd.innerHTML = bookInfo.title;
 
@@ -66,7 +74,7 @@ function appendTable(bookInfo) {
     var actionsTd = document.createElement('td');
     actionsTd.append(viewButton, checkOutButton);
 
-    tr.append(titleTd, authorTd, countTd, actionsTd);
+    tr.append(imageTd, titleTd, authorTd, countTd, actionsTd);
     booksTbody.appendChild(tr);
 }
 

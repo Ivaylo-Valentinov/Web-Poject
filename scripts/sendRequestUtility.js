@@ -24,6 +24,7 @@ function sendMultipartDataRequest(url, options, successCallback, errorCallback) 
     request.open(options.method, url, true);
     request.send(options.formdata);
     request.addEventListener('load', function() {
+        console.log(request.responseText);
         var response = JSON.parse(request.responseText);
         
         if (request.status === 200) {

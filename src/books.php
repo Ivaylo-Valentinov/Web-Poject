@@ -47,6 +47,10 @@
 
     $link = "pdfs/".$file_name;
 
+    $img_tmp_name = $_FILES['image']['tmp_name'];
+    $img_name = uniqid().$_FILES['image']['name'];
+    $image = "img/".$img_name;
+
     $uploadResult = $book->saveBookPDF($file_tmp_name, $file_name, $file_type);
 
     if (!$uploadResult["success"]) {
@@ -54,10 +58,19 @@
     }
 
     if (!$errors) {
-        $result = $book->insertBook($title, $author, $desc, $count, $link);
+        $imageUploadResult = $book->saveImage($img_tmp_name, $img_name);
+        if (!$imageUploadResult["success"]) {
+            unlink("../pdfs/".$file_name);
+            $errors[] = $imageUploadResult["error"];
+        }
+    }
+
+    if (!$errors) {
+        $result = $book->insertBook($title, $author, $desc, $count, $link, $image);
 
         if(!$result["success"]) {
             unlink("../pdfs/".$file_name);
+            unlink("../img/".$img_name);
             $errors[] = $result["error"];
         }
     }

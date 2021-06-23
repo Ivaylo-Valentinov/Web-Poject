@@ -43,7 +43,7 @@ class Database {
   }
 
   private function prepareStatements() {
-    $sql = "INSERT INTO books(title, author, description, count, type, link) VALUES(:title, :author, :description, :count, :type, :link)";
+    $sql = "INSERT INTO books(title, author, description, count, type, link, image) VALUES(:title, :author, :description, :count, :type, :link, :image)";
     $this->insertBook = $this->connection->prepare($sql);
 
     $sql = "SELECT * FROM books WHERE type = :type";

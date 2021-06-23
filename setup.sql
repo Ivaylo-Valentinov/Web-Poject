@@ -49,10 +49,3 @@ CREATE TABLE `bookaloo`.`tokens` (
 
 INSERT INTO bookaloo.users(username, password, email) VALUES("default", "$2y$10$4TpX1PPWyjF2tVNlXLG6W.DVGwd3G9wSkJo9tm3clCOIMUfdLWObu", "default@email.com");
 INSERT INTO bookaloo.users(username, password, email) VALUES("default2", "$2y$10$4TpX1PPWyjF2tVNlXLG6W.DVGwd3G9wSkJo9tm3clCOIMUfdLWObu", "default@email.com");
-INSERT INTO bookaloo.books(title, author, description, count, type, link) VALUES("Book 1", "Book Author 1", "Book Description 1", 1, "book", "placeholder_link");
-INSERT INTO bookaloo.books(title, author, description, count, type, link) VALUES("Book 2", "Book Author 2", "Book Description 2", 1, "book", "placeholder_link");
-INSERT INTO bookaloo.books(title, author, description, count, type, link) VALUES("Book 3", "Book Author 3", "Book Description 3", 1, "book", "placeholder_link");
-
-INSERT INTO bookaloo.books(title, author, description, count, type, link) VALUES("Ref 1", "Ref Author 1", "Ref Description 1", 1, "ref", "placeholder_link");
-INSERT INTO bookaloo.books(title, author, description, count, type, link) VALUES("Ref 2", "Ref Author 2", "Ref Description 2", 1, "ref", "placeholder_link");
-INSERT INTO bookaloo.books(title, author, description, count, type, link) VALUES("Ref 3", "Ref Author 3", "Ref Description 3", 1, "ref", "placeholder_link");
