@@ -13,6 +13,7 @@ class Database {
   private $checkoutBook;
   private $returnBook;
   private $incrementCheckoutCount;
+  private $decrementCheckoutCount;
   private $incrementCheckedOutBooksCount;
   private $decrementCheckedOutBooksCount;
   private $checkTakenStatus;
@@ -70,6 +71,9 @@ class Database {
 
     $sql = "UPDATE books SET checkout_amount = checkout_amount+1 WHERE id =:bookId";
     $this->incrementCheckoutCount = $this->connection->prepare($sql);
+
+    $sql = "UPDATE books SET checkout_amount = checkout_amount-1 WHERE id =:bookId";
+    $this->decrementCheckoutCount = $this->connection->prepare($sql);
     
     $sql = "UPDATE users SET checked_count = checked_count+1 WHERE id =:userId";
     $this->incrementCheckedOutBooksCount = $this->connection->prepare($sql);
@@ -251,6 +255,7 @@ class Database {
         $this->connection->beginTransaction();
 
         $this->returnBook->execute(["bookid"=>$data["bookid"]]);
+        $this->decrementCheckoutCount->execute(["bookId" => $data["bookid"]]);
         $this->decrementCheckedOutBooksCount->execute(["userId"=>$data["user_id"]]);
 
         $this->connection->commit();

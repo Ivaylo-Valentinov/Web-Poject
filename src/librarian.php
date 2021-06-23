@@ -51,6 +51,24 @@
             }
         }
 
+        public function bookInStock ($book_id) {
+            $query = $this->db->selectBookByIdQuery(["id"=>$book_id]);
+            
+            if($query["success"]){
+                $result = $query["data"]->fetch(PDO::FETCH_ASSOC);
+                $checkout_amount = $result["checkout_amount"];
+                $count = $result["count"];
+                if($checkout_amount < $count){
+                    return true;
+                }
+                else{
+                        return false;
+                }
+            }
+            else{
+                    return $query;
+            }
+        }
 
 
         public function isTakenBool($user_id, $book_id) {

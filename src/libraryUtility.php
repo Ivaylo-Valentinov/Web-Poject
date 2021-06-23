@@ -26,9 +26,15 @@ if(isset($_POST)){
             if($opType == "check"){
                 $isTaken =$lib->isTaken($_SESSION['user_id'], $data["bookid"]);
                 $canTakeAnotherBook = $lib->canTakeBook($_SESSION['user_id']);
+                $bookInStock = $lib->bookInStock( $data["bookid"]);
                 if(!$isTaken ) {
                     if($canTakeAnotherBook){
-                        $query = $db->checkoutBook(["user_id" => $_SESSION['user_id'], "bookid" => $data["bookid"], "expDate" => date('Y-m-d', strtotime("+20 days"))]);
+                        if($bookInStock){
+                            $query = $db->checkoutBook(["user_id" => $_SESSION['user_id'], "bookid" => $data["bookid"], "expDate" => date('Y-m-d', strtotime("+20 days"))]);
+                        }else{
+                            $query = ["success"=>false, "error"=>"Book not in stock!"];
+                        }
+                        
                     }
                     else{
                         $query = ["success"=>false, "error"=>"Can't take more books!"];
