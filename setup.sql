@@ -21,7 +21,7 @@ CREATE TABLE `bookaloo`.`books` (
   `type` VARCHAR(255) NOT NULL ,
   `link` VARCHAR(255) NOT NULL ,
   `checkout_amount` INT NOT NULL DEFAULT 0 ,
-  `image` VARCHAR(255) NOT NULL ,
+  `image` VARCHAR(255) ,
   PRIMARY KEY (`id`)
 ) ENGINE = InnoDB;
 
