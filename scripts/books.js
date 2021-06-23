@@ -42,7 +42,7 @@ function appendTable(bookInfo) {
     checkOutButton.addEventListener("click", function () {
         checkoutBook(bookInfo.id);
     });
-    var bookInStock = (bookInfo.count - bookInfo.checkout_amount)> 0;
+    
     if(bookInfo.isTaken) {
         checkOutButton.disabled = true;
         checkOutButton.style.background = "lightgrey";
@@ -54,6 +54,8 @@ function appendTable(bookInfo) {
         viewButton.style.background = "lightgrey";
         viewButton.style.color = "black";
     }
+
+    var bookInStock = (bookInfo.count - bookInfo.checkout_amount)> 0;
 
     if(!bookInStock){
         checkOutButton.disabled = true;
