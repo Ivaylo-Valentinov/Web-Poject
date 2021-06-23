@@ -29,7 +29,7 @@ function appendTable(bookInfo) {
     authorTd.innerHTML = bookInfo.author;
 
     var countTd = document.createElement('td');
-    countTd.innerHTML = bookInfo.count;
+    countTd.innerHTML = bookInfo.count - bookInfo.checkout_amount;
 
     var viewButton = document.createElement('button');
     viewButton.innerHTML = 'Read';
@@ -42,7 +42,7 @@ function appendTable(bookInfo) {
     checkOutButton.addEventListener("click", function () {
         checkoutBook(bookInfo.id);
     });
-
+    
     if(bookInfo.isTaken) {
         checkOutButton.disabled = true;
         checkOutButton.style.background = "lightgrey";
@@ -53,6 +53,14 @@ function appendTable(bookInfo) {
         viewButton.disabled = true;
         viewButton.style.background = "lightgrey";
         viewButton.style.color = "black";
+    }
+
+    var bookInStock = (bookInfo.count - bookInfo.checkout_amount)> 0;
+
+    if(!bookInStock){
+        checkOutButton.disabled = true;
+        checkOutButton.style.background = "lightgrey";
+        checkOutButton.style.color = "black";
     }
 
     var actionsTd = document.createElement('td');

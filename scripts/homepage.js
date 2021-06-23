@@ -1,32 +1,16 @@
 (function () {
-    console.log("Entering homepage script");
-
     requestTakenBooks();
-
 })();
 
 
 function requestTakenBooks() {
-    console.log("Requesting taken books");
-
     var user = {
         user_id: 1,
     };
     sendRequest('src/homepage.php', { method: 'POST', data: `data=${JSON.stringify(user)}` }, load, console.log);
-    console.log("After request");
-
 }
 
-
-/**
- * Handle the received response from the server
- * If there were no errors found on validation, the index.html is loaded.
- * Else the errors are displayed to the user.
- * @param {*} response
- */
 function load(response) {
-    console.log("Load function");
-    console.log(response);
     if (response.success) {
         loadTables(response["data"]);
     } else {
@@ -74,22 +58,12 @@ function appendCheckedBooksTable(bookInfo) {
 }
 
 function returnBook(bookID) {
-    /**
-        * Create an object with the user's data
-        */
-
-    console.log("HELP I WAS CLICKED!!!!");
     var user = {
         bookid: bookID,
         opType: "return"
     };
 
-
-    /**
-     * Send POST request with user's data to api.php/login
-     */
     sendRequest('src/libraryUtility.php', { method: 'POST', data: `data=${JSON.stringify(user)}` }, requestTakenBooks, console.log);
-
 }
 
 function appendCheckedRefsTable(bookInfo) {
@@ -129,14 +103,12 @@ function appendCheckedRefsTable(bookInfo) {
 }
 
 function loadTables(bookData) {
-    console.log("Generating tables");
     var booksTbody = document.querySelector('#checkedBooks tbody');
     booksTbody.innerHTML = "";
     var referatsTbody = document.querySelector('#checkedReferats tbody');
     referatsTbody.innerHTML = "";
     bookData.forEach(function (bookInfo) {
         if (bookInfo.type == "book") {
-
             appendCheckedBooksTable(bookInfo);
         }
         else {

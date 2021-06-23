@@ -28,4 +28,5 @@ function appendToFlex(info, container) {
 
     element.innerHTML = info.title +"- "+ info.total_checkout_amount + " checkouts";
     container.append(element);
+    
 }

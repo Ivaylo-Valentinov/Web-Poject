@@ -75,6 +75,9 @@ class Database {
 
     $sql = "UPDATE books SET checkout_amount = checkout_amount+1 WHERE id =:bookId";
     $this->incrementCheckoutCount = $this->connection->prepare($sql);
+
+    $sql = "UPDATE books SET checkout_amount = checkout_amount-1 WHERE id =:bookId";
+    $this->decrementCheckoutCount = $this->connection->prepare($sql);
     
     $sql = "UPDATE users SET checked_count = checked_count+1 WHERE id =:userId";
     $this->incrementCheckedOutBooksCount = $this->connection->prepare($sql);
@@ -171,10 +174,6 @@ class Database {
   }
 
   
-   /**
-         * We use this method to execute queries for inserting user session token
-         * We only execute the created prepared statement for inserting user in DB with new database
-         */
       public function insertTokenQuery($data) {
         try{
             $this->insertToken->execute($data);
@@ -184,11 +183,6 @@ class Database {
           }
       }
 
-      /**
-       * We use this method to execute queries for getting user session token
-       * We only execute the created prepared statement for selecting user in DB with new database
-       * If the query was executed successfully, we return the result of the executed query
-       */
       public function selectTokenQuery($data) {
           try{
               $this->selectToken->execute($data);
@@ -200,11 +194,6 @@ class Database {
           }
       }
 
-      /**
-         * We use this method to execute queries for getting user data by user id
-         * We only execute the created prepared statement for selecting user in DB with new database
-         * If the query was executed successfully, we return the result of the executed query
-         */
         public function selectUserByIdQuery($data) {
           try{
               $this->selectUserById->execute($data);
@@ -271,6 +260,7 @@ class Database {
         $this->connection->beginTransaction();
 
         $this->returnBook->execute(["bookid"=>$data["bookid"]]);
+        $this->decrementCheckoutCount->execute(["bookId" => $data["bookid"]]);
         $this->decrementCheckedOutBooksCount->execute(["userId"=>$data["user_id"]]);
 
         $this->connection->commit();
@@ -282,9 +272,6 @@ class Database {
     }
 }
 
-      /**
-  * Close the connection to the DB
-  */
   function __destruct() {
     $this->connection = null;
   }
