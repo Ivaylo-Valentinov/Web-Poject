@@ -26,6 +26,14 @@ function appendCheckedBooksTable(bookInfo) {
     var tr = document.createElement('tr');
     tr.setAttribute('class', 'book');
 
+    var imageTd = document.createElement('td');
+    var image = document.createElement('img');
+    if (!bookInfo.image) {
+        bookInfo.image = 'img/placeholder.png';
+    }
+    image.setAttribute('src', bookInfo.image);
+    imageTd.append(image);
+
     var titleTd = document.createElement('td');
     titleTd.innerHTML = bookInfo.title;
 
@@ -53,7 +61,7 @@ function appendCheckedBooksTable(bookInfo) {
     var actionsTd = document.createElement('td');
     actionsTd.append(viewButton, returnButton);
 
-    tr.append(titleTd, authorTd, checkoutTd, expirationTd, actionsTd);
+    tr.append(imageTd, titleTd, authorTd, checkoutTd, expirationTd, actionsTd);
     booksTbody.appendChild(tr);
 }
 
@@ -72,6 +80,14 @@ function appendCheckedRefsTable(bookInfo) {
     var tr = document.createElement('tr');
     tr.setAttribute('class', 'referat');
 
+    var imageTd = document.createElement('td');
+    var image = document.createElement('img');
+    if (!bookInfo.image) {
+        bookInfo.image = 'img/placeholder.png';
+    }
+    image.setAttribute('src', bookInfo.image);
+    imageTd.append(image);
+
     var titleTd = document.createElement('td');
     titleTd.innerHTML = bookInfo.title;
 
@@ -98,7 +114,7 @@ function appendCheckedRefsTable(bookInfo) {
     var actionsTd = document.createElement('td');
     actionsTd.append(viewButton, returnButton);
 
-    tr.append(titleTd, authorTd, checkoutTd, expirationTd, actionsTd);
+    tr.append(imageTd, titleTd, authorTd, checkoutTd, expirationTd, actionsTd);
     booksTbody.appendChild(tr);
 }
 

@@ -53,7 +53,19 @@ class Book {
     return ["success" => true];
   }
 
-  public function insertBook($title, $author, $description, $count, $link) {
+  public function saveImage($img_tmp_name, $img_name) {
+    if($img_name){
+        if(!move_uploaded_file($img_tmp_name,"../img/".$img_name)) {
+            return ["success" => false, "error" => "Unsuccessful upload image"];
+        }
+    } else {
+        return ["success" => false, "error" =>  "Cannot save image"];
+    }
+
+    return ["success" => true];
+  }
+
+  public function insertBook($title, $author, $description, $count, $link, $image) {
     $validate = $this->validateString($title);
     if (!$validate["success"]) {
       return $validate;
@@ -80,7 +92,8 @@ class Book {
       "description" => $description,
       "count" => $count,
       "link" => $link,
-      "type" =>  $this->type
+      "type" =>  $this->type,
+      "image" => $image
     ]);
 
     return $query;
